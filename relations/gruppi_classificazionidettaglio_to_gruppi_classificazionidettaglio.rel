@@ -1,0 +1,7 @@
+allowParentDeleteWhenHavingRelatedRecords:false,
+foreignDataSource:"db:/ma_anagrafiche/gruppi_classificazionidettaglio",
+joinType:1,
+name:"gruppi_classificazionidettaglio_to_gruppi_classificazionidettaglio",
+primaryDataSource:"db:/ma_anagrafiche/gruppi_classificazionidettaglio",
+typeid:22,
+uuid:"B84EC271-CFED-4032-9F1C-32B4521B42D1"

@@ -1,0 +1,11 @@
+allowCreationRelatedRecords:false,
+foreignDataSource:"db:/ma_common/tab_mese",
+items:[
+{foreignColumnName:"mese",operator:260,primaryDataProviderID:"globals.vls_mese_filter_min",typeid:23,uuid:"B8B6BA4D-7F8E-4797-AFE1-F4DDE7428534"},
+{foreignColumnName:"mese",operator:259,primaryDataProviderID:"globals.vls_mese_filter_max",typeid:23,uuid:"F4BF2C54-60A8-4D3C-AB28-DC1FD1494E86"}
+],
+joinType:1,
+name:"_to_tab_mese_filtered",
+primaryDataSource:"db:/ma_common/tab_mese",
+typeid:22,
+uuid:"CB05DAB7-091A-4049-9056-9B3476C5186B"

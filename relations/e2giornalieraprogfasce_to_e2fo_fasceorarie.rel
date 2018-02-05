@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/ma_presenze/e2fo_fasceorarie",
+items:[
+{foreignColumnName:"idfasciaoraria",primaryDataProviderID:"idfasciaoraria",typeid:23,uuid:"9B7FB123-505D-4D5B-ABF9-EF34F0DDE46E"}
+],
+joinType:1,
+name:"e2giornalieraprogfasce_to_e2fo_fasceorarie",
+primaryDataSource:"db:/ma_presenze/e2giornalieraprogfasce",
+typeid:22,
+uuid:"619648A0-9DA5-4384-A9C8-3E7BD37ADDA7"

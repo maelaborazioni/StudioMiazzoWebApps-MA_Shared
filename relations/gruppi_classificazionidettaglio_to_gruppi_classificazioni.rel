@@ -1,0 +1,9 @@
+foreignDataSource:"db:/ma_anagrafiche/gruppi_classificazioni",
+items:[
+{foreignColumnName:"idgruppoclassificazione",primaryDataProviderID:"idgruppoclassificazione",typeid:23,uuid:"08E9E346-CB8B-47D7-BF33-60B842B32895"}
+],
+joinType:1,
+name:"gruppi_classificazionidettaglio_to_gruppi_classificazioni",
+primaryDataSource:"db:/ma_anagrafiche/gruppi_classificazionidettaglio",
+typeid:22,
+uuid:"CC015333-742D-42D6-B946-42519E2BF51E"

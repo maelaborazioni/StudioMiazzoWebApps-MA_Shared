@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:false,
+foreignDataSource:"db:/ma_presenze/e2tabqualifiche",
+items:[
+{foreignColumnName:"radicequalifica",operator:0,primaryDataProviderID:"codqualifica",typeid:23,uuid:"647E06E7-1CE6-4831-8FEB-142EAF844CC7"}
+],
+joinType:0,
+name:"lavoratori_to_e2tabqualifiche",
+primaryDataSource:"db:/ma_anagrafiche/lavoratori",
+typeid:22,
+uuid:"7102FE33-6B62-40E6-B287-D453BBEEBBB5"

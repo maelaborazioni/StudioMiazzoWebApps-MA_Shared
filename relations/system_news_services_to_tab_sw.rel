@@ -1,0 +1,10 @@
+allowParentDeleteWhenHavingRelatedRecords:false,
+foreignDataSource:"db:/ma_anagrafiche/tab_sw",
+items:[
+{foreignColumnName:"idtabsw",primaryDataProviderID:"idtabserviziosoftware",typeid:23,uuid:"3045EAC3-D9B9-4126-ACCC-D002365869E7"}
+],
+joinType:1,
+name:"system_news_services_to_tab_sw",
+primaryDataSource:"db:/ma_news/system_news_services",
+typeid:22,
+uuid:"A5C70CB7-6418-4A20-8020-1CBFF3B3402D"

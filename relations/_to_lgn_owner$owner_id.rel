@@ -1,0 +1,10 @@
+allowParentDeleteWhenHavingRelatedRecords:false,
+foreignDataSource:"db:/svy_framework/sec_owner",
+items:[
+{foreignColumnName:"owner_id",primaryDataProviderID:"scopes.globals.svy_sec_lgn_owner_id",typeid:23,uuid:"EEE2627B-AD9C-43B2-A62C-B2200063467D"}
+],
+joinType:1,
+name:"_to_lgn_owner$owner_id",
+primaryDataSource:"db:/svy_framework/sec_owner",
+typeid:22,
+uuid:"23159185-9040-42AA-940D-8273AD58A0E9"

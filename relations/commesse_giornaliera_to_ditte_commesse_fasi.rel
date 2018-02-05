@@ -1,0 +1,9 @@
+foreignDataSource:"db:/ma_anagrafiche/ditte_commesse_fasi",
+items:[
+{foreignColumnName:"iddittacommessafase",primaryDataProviderID:"iddittacommessafase",typeid:23,uuid:"8FA65273-85BC-4438-8092-C1EDB4D99D74"}
+],
+joinType:1,
+name:"commesse_giornaliera_to_ditte_commesse_fasi",
+primaryDataSource:"db:/ma_presenze/commesse_giornaliera",
+typeid:22,
+uuid:"EB471418-B20C-42A2-B78B-B527F3F79473"

@@ -1,0 +1,10 @@
+allowParentDeleteWhenHavingRelatedRecords:false,
+foreignDataSource:"db:/ma_news/system_news_services",
+items:[
+{foreignColumnName:"protocol",primaryDataProviderID:"protocol",typeid:23,uuid:"26FD66FF-C112-4748-B5A2-D85100D5699F"}
+],
+joinType:1,
+name:"system_news_to_system_news_services",
+primaryDataSource:"db:/ma_news/system_news",
+typeid:22,
+uuid:"3FF7F0BA-2104-4F41-8438-FE200872AA8F"

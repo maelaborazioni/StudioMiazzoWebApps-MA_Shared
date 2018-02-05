@@ -1,0 +1,11 @@
+allowCreationRelatedRecords:false,
+foreignDataSource:"db:/ma_common/tab_anno",
+items:[
+{foreignColumnName:"anno",operator:259,primaryDataProviderID:"globals.vls_anno_filter_max",typeid:23,uuid:"174A98E5-3E90-4691-B812-AC551E34BBC0"},
+{foreignColumnName:"anno",operator:260,primaryDataProviderID:"globals.vls_anno_filter_min",typeid:23,uuid:"5DA8A398-A8FD-4CEE-80C1-56BFA3660BC4"}
+],
+joinType:1,
+name:"_to_tab_anno_filtered",
+primaryDataSource:"db:/ma_common/tab_anno",
+typeid:22,
+uuid:"6771E144-9BAE-4921-986B-5466BCD8D8E8"

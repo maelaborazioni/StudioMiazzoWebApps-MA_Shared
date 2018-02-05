@@ -1,0 +1,10 @@
+allowParentDeleteWhenHavingRelatedRecords:false,
+foreignDataSource:"db:/ma_common/tab_servizi",
+items:[
+{foreignColumnName:"idtabservizio",primaryDataProviderID:"idtabservizio",typeid:23,uuid:"908EBC1F-30AD-4AB8-8FF8-E3C84AB31C18"}
+],
+joinType:1,
+name:"ditte_servizi_to_tab_servizi",
+primaryDataSource:"db:/ma_anagrafiche/ditte_servizi",
+typeid:22,
+uuid:"87A35C66-2854-4C05-8D4C-28CC023E1754"

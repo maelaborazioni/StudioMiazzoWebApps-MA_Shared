@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:false,
+foreignDataSource:"db:/ma_anagrafiche/v_ditte_cliente2sede",
+items:[
+{foreignColumnName:"iddittacliente",operator:0,primaryDataProviderID:"idditta",typeid:23,uuid:"38769674-5C5A-4D5D-9533-FE1962B06DDA"}
+],
+joinType:1,
+name:"lavoratori_cliente_to_v_ditte_cliente2sede",
+primaryDataSource:"db:/ma_anagrafiche/lavoratori",
+typeid:22,
+uuid:"1742303F-F2CB-4466-87ED-F7F15B992726"

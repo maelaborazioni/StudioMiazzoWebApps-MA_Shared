@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:false,
+foreignDataSource:"db:/ma_presenze/e2tabgruppicontrattuali",
+items:[
+{foreignColumnName:"radicecontratto",operator:0,primaryDataProviderID:"codcontratto",typeid:23,uuid:"77C85081-462F-42AD-A8A4-69A904CFEBC5"}
+],
+joinType:0,
+name:"lavoratori_to_e2tabgruppicontrattuali",
+primaryDataSource:"db:/ma_anagrafiche/lavoratori",
+typeid:22,
+uuid:"357FF6E8-993C-45FF-ACDD-32E08B4C0971"

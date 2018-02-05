@@ -1,0 +1,11 @@
+addEmptyValue:1,
+customValues:null,
+dataProviderID1:"anno",
+dataSource:null,
+name:"vls_anno",
+relationName:"_to_tab_anno_filtered",
+returnDataProviders:1,
+showDataProviders:1,
+typeid:34,
+uuid:"E4C2A26B-BCEB-4126-90DC-9F6E293CBA89",
+valueListType:1

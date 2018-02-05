@@ -1,0 +1,11 @@
+allowCreationRelatedRecords:false,
+allowParentDeleteWhenHavingRelatedRecords:true,
+foreignDataSource:"db:/ma_anagrafiche/ditte",
+items:[
+{foreignColumnName:"idditta",operator:0,primaryDataProviderID:"idditta",typeid:23,uuid:"C18C922E-A248-4648-A63F-0D0CD4305A37"}
+],
+joinType:1,
+name:"lavoratori_to_ditte",
+primaryDataSource:"db:/ma_anagrafiche/lavoratori",
+typeid:22,
+uuid:"A7A9046D-CC7F-4A63-AF2C-85DFFF75C8D0"

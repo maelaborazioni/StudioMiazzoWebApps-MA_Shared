@@ -1,0 +1,9 @@
+foreignDataSource:"db:/ma_anagrafiche/ditte_commesse",
+items:[
+{foreignColumnName:"iddittacommessa",primaryDataProviderID:"iddittacommessa",typeid:23,uuid:"BB36ED4D-748E-44E8-9B7E-0083C4ED3E02"}
+],
+joinType:1,
+name:"ditte_commesse_fasi_to_ditte_commesse",
+primaryDataSource:"db:/ma_anagrafiche/ditte_commesse_fasi",
+typeid:22,
+uuid:"241BA295-DF15-4931-808C-DE630C4DAEC8"

@@ -1,0 +1,12 @@
+addEmptyValue:1,
+customValues:null,
+dataProviderID1:"ragionesociale",
+dataProviderID2:"idditta",
+dataSource:"db:/ma_anagrafiche/ditte",
+name:"vls_ditta_ragionesociale",
+relationName:null,
+returnDataProviders:2,
+showDataProviders:1,
+typeid:34,
+uuid:"802FAB6B-5616-44D4-9CF8-5D9ACDC64623",
+valueListType:1

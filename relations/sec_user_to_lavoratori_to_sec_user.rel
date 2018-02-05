@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/svy_framework/sec_user",
+items:[
+{foreignColumnName:"user_id",operator:0,primaryDataProviderID:"user_id",typeid:23,uuid:"38C8124D-1066-4973-BE8B-FEF69ABE9454"}
+],
+joinType:1,
+name:"sec_user_to_lavoratori_to_sec_user",
+primaryDataSource:"db:/svy_framework/sec_user_to_lavoratori",
+typeid:22,
+uuid:"C2FCC13E-6E10-425F-AA38-4CD24D6F6255"

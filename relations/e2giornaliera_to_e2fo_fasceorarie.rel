@@ -1,0 +1,10 @@
+allowParentDeleteWhenHavingRelatedRecords:false,
+foreignDataSource:"db:/ma_presenze/e2fo_fasceorarie",
+items:[
+{foreignColumnName:"idfasciaoraria",primaryDataProviderID:"idfasciaorariaassegnata",typeid:23,uuid:"DEEC7BCA-CA32-4A1E-A1B7-F6B2431AB518"}
+],
+joinType:1,
+name:"e2giornaliera_to_e2fo_fasceorarie",
+primaryDataSource:"db:/ma_presenze/e2giornaliera",
+typeid:22,
+uuid:"A4CCB766-064D-47F7-84E3-6F9A50D8BA7F"

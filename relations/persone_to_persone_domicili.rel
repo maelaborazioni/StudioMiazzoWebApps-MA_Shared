@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/ma_anagrafiche/persone_domicili",
+items:[
+{foreignColumnName:"codicefiscale",primaryDataProviderID:"codicefiscale",typeid:23,uuid:"92B76E71-53B5-4A6A-9E16-AB529976DC94"}
+],
+name:"persone_to_persone_domicili",
+primaryDataSource:"db:/ma_anagrafiche/persone",
+typeid:22,
+uuid:"2166C115-E72E-4CD0-B414-42EBAE415433"

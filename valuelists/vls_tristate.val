@@ -1,0 +1,9 @@
+addEmptyValue:1,
+customValues:"%%i18n:svy.fr.lbl.yes%%|1
+%%i18n:svy.fr.lbl.no%%|0
+%%i18n:ma.lbl.undefined%%|2",
+name:"vls_tristate",
+returnDataProviders:1,
+showDataProviders:1,
+typeid:34,
+uuid:"7E07ADB5-7080-4F5A-8443-39B4BDF0A5C2"

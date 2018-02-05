@@ -1,0 +1,12 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/ma_hr/dittescopiriclassificazioni",
+items:[
+{foreignColumnName:"idditta",operator:0,primaryDataProviderID:"idditta",typeid:23,uuid:"C02AAB60-EC30-475A-8049-24B8430C17F0"},
+{foreignColumnName:"idscopo",operator:0,primaryDataProviderID:"idscopo",typeid:23,uuid:"D6ADB0F9-4267-438E-BA7C-FA080125831F"}
+],
+joinType:0,
+name:"dittascopo_to_scopiriclassificazioni",
+primaryDataSource:"db:/ma_hr/dittascopo",
+typeid:22,
+uuid:"E78D36D3-8C3C-425A-99CA-BCBAC49EE071"

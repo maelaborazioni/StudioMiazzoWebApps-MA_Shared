@@ -1,0 +1,7 @@
+allowCreationRelatedRecords:false,
+foreignDataSource:"db:/ma_anagrafiche/ditte",
+joinType:0,
+name:"ditte_to_ditte",
+primaryDataSource:"db:/ma_anagrafiche/ditte",
+typeid:22,
+uuid:"615133AE-8661-4647-8A41-29677DB8DFFC"

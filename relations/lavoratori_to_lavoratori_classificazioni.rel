@@ -1,0 +1,9 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/ma_anagrafiche/lavoratori_classificazioni",
+items:[
+{foreignColumnName:"idlavoratore",primaryDataProviderID:"idlavoratore",typeid:23,uuid:"77B1DE72-F746-4986-A817-13A56F6B9C94"}
+],
+name:"lavoratori_to_lavoratori_classificazioni",
+primaryDataSource:"db:/ma_anagrafiche/lavoratori",
+typeid:22,
+uuid:"EDA39FBA-94ED-4A9A-AB95-B5D369614D9C"
