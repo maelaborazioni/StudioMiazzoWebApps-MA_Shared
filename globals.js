@@ -4271,7 +4271,7 @@ function gestisciInvioComunicazione(dataRichiesta,statoRichiesta,approvatoIl,app
 	if (emailaddress) {
 		if (emailaddress && plugins.mail.isValidEmailAddress(emailaddress)) 
 		{
-			var properties = globals.setSendGridSmtpProperties();
+			var properties = globals.setSparkPostSmtpProperties();
 			var subject = "Presenza Semplice Studio Miazzo - Comunicazione gestione richiesta ferie e permessi";
 			var subjectEn = "Advice for new request - Presenza Semplice Studio Miazzo";
 			
@@ -4322,7 +4322,7 @@ function gestisciInvioComunicazione(dataRichiesta,statoRichiesta,approvatoIl,app
 			// invia all'utente direttamente interessato 
 			var success = plugins.mail.sendMail
 			(emailaddress,
-				'Gestore ferie e permessi <assistenza@studiomiazzo.it>',
+				'Ferie e permessi <assistenza@studiomiazzo.it>',
 				englishLang ? subjectEn : subject,
                 englishLang ? msgTextEn : msgText,
 				null,
@@ -4359,7 +4359,7 @@ function gestisciInvioComunicazione(dataRichiesta,statoRichiesta,approvatoIl,app
 			if (arrId[o] != approvatoDa && otheremailaddress) {
 				if (plugins.mail.isValidEmailAddress(otheremailaddress)) 
 				{
-					var otherproperties = globals.setSendGridSmtpProperties();
+					var otherproperties = globals.setSparkPostSmtpProperties();
 					var othersubject = "Presenza Semplice Studio Miazzo - Comunicazione gestione richiesta ferie e permessi";
 					var othermsgText = "plain msg<html>";
 					var othermsgTextEn = othermsgText; //"English version : <br/><p style = \"font-size : 14px\">";
@@ -4406,7 +4406,7 @@ function gestisciInvioComunicazione(dataRichiesta,statoRichiesta,approvatoIl,app
 					// invia all'utente direttamente interessato 
 					var othersuccess = plugins.mail.sendMail
 					(otheremailaddress,
-						'Gestore ferie e permessi <assistenza@studiomiazzo.it>',
+						'Ferie e permessi <assistenza@studiomiazzo.it>',
 						othersubject,
 						globals.ma_utl_hasKey(globals.Key.ENGLISH_LAN) ? othermsgTextEn : othermsgText,
 						null,
@@ -4466,7 +4466,7 @@ function gestisciInvioComunicazione(dataRichiesta,statoRichiesta,approvatoIl,app
 //						// invia all'utente direttamente interessato 
 //						var othersuccess = plugins.mail.sendMail
 //						(otheremailaddress,
-//							'Gestore ferie e permessi <assistenza@studiomiazzo.it>',
+//							'Ferie e permessi <assistenza@studiomiazzo.it>',
 //							othersubject,
 //							othermsgText,
 //							null,
