@@ -19,7 +19,7 @@ function idlavoratore_sede()
  */
 function idditta_sede()
 {
-	return (globals.isCliente() ? lavoratori_cliente_to_v_ditte_cliente2sede.iddittasede : idditta);
+	return (globals.isCliente() ? (lavoratori_cliente_to_v_ditte_cliente2sede && lavoratori_cliente_to_v_ditte_cliente2sede.iddittasede || null) : idditta);
 }
 
 /**
@@ -35,7 +35,7 @@ function idlavoratore_cliente()
  */
 function idditta_cliente()
 {
-	return (globals.isCliente() ? idditta : lavoratori_cliente_to_v_ditte_cliente2sede.iddittasede);
+	return (globals.isCliente() ? idditta : (lavoratori_cliente_to_v_ditte_cliente2sede && lavoratori_cliente_to_v_ditte_cliente2sede.iddittasede || null));
 }
 
 /**
@@ -43,7 +43,7 @@ function idditta_cliente()
  */
 function idlavoratore_string()
 {
-	if(idlavoratore)
+	if(idlavoratore && !isNaN(idlavoratore))
 	   return idlavoratore.toString();
 	return null;
 }
