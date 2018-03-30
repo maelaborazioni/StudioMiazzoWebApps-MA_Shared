@@ -469,6 +469,7 @@ var Table =
 	FILE_LOG						: 'filelog',
 	LAVORATORI						: 'lavoratori',
 	LAVORATORI_DATIANAGRAFICI		: 'lavoratori_datianagrafici',
+	LAVORATORI_CLASSIFICAZIONI      : 'lavoratori_classificazioni',
 	LAVORATORI_JOB					: 'lavoratori_job',
 	PERSONE                         : 'persone',
 	PERSONE_DOMICILI                : 'persone_domicili',
@@ -3893,7 +3894,7 @@ function getDitteInterinali()
     if(fsDitte.find())
     {
     	fsDitte.tipologia = globals.Tipologia.ESTERNA;
-    	fsDitte.ditte_to_ditte_legami.tipoesterni = 1;
+    	fsDitte.ditte_to_ditte_legami.tipoesterni = 0;
     	if(fsDitte.search())
     		return globals.foundsetToArray(fsDitte,'idditta');
     }
@@ -4610,3 +4611,148 @@ function getEventiAbilitati(idDitta,idTabCategoriaSw)
 	return null;
 }
 
+/**
+ * @param {Number} idLav
+ * @param {Date} giornoDal
+ * @param {Date} giornoAl
+ * 
+ * @return {JSFoundSet<db:/ma_presenze/e2giornalieraprogfasce>}
+ * 
+ * @properties={typeid:24,uuid:"971D9A52-824D-44CF-90BE-70F924562AB1"}
+ * @AllowToRunInFind
+ */
+function getProgrammazioneFasceDalAl(idLav,giornoDal,giornoAl)
+{
+	/** @type {JSFoundset<db:/ma_presenze/e2giornalieraprogfasce>} */
+	var fsFasceProg = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.GIORNALIERA_PROGFASCE);
+	if(fsFasceProg.find())
+	{
+		fsFasceProg.iddip = idLav;
+		if(giornoDal && giornoAl)
+		   fsFasceProg.giorno = globals.dateFormat(giornoDal,globals.ISO_DATEFORMAT) + '...' + globals.dateFormat(giornoAl,globals.ISO_DATEFORMAT) + '|yyyyMMdd';
+		else if(giornoDal)
+			fsFasceProg.giorno = '>=' + globals.dateFormat(giornoDal,globals.ISO_DATEFORMAT) + '|yyyyMMdd';
+		else
+			fsFasceProg.giorno = '<=' + globals.dateFormat(giornoAl,globals.ISO_DATEFORMAT) + '|yyyyMMdd';
+		
+		if(fsFasceProg.search())
+			return fsFasceProg;
+	}
+	
+	return null;
+}
+
+/**
+ * Rende timbrature precedentemente assegnate nuovamente disponibili per l'assegnazione
+ * nella successiva acquisizione
+ * 
+ * @param {Number} iddip
+ * @param {Date} dal
+ * @param {Date} [al]
+ *
+ * @properties={typeid:24,uuid:"198A3D62-60CD-4471-8598-0192D2B57E44"}
+ * @AllowToRunInFind
+ */
+function rendiTimbratureRiassegnabili(iddip,dal,al)
+{
+	/** @type {JSFoundSet<db:/ma_presenze/e2timbratura>}*/
+	var fsTimb = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.TIMBRATURE);
+	if(fsTimb.find())
+	{
+		if(al == null)
+			al = globals.TODAY;
+		dal = new Date(dal.getFullYear(),dal.getMonth(),dal.getDate() + 1);
+		
+		fsTimb.iddip = iddip;
+		fsTimb.timbratura = (dal.getFullYear() * 100000000 + (dal.getMonth() + 1) * 1000000 + dal.getDate() * 10000) 
+		                  + '...' + (al.getFullYear() * 100000000 + (al.getMonth() + 1) * 1000000 + al.getDate() * 10000 + 2359);
+	
+		if(fsTimb.search())
+		{
+			var fsTimbUpdater = databaseManager.getFoundSetUpdater(fsTimb);
+			fsTimbUpdater.setColumn('iddip',0);
+			fsTimbUpdater.performUpdate();
+		}
+	}
+}
+
+/**
+ * Pulisce i dati relativi agli eventi presenti in giornaliera
+ * 
+ * @param {Number} iddip
+ * @param {Date} dal
+ * @param {Date} [al]
+ *
+ * @properties={typeid:24,uuid:"409D0699-82E4-4CCD-8197-9E7B60AB7635"}
+ */
+function pulisciGiornaliera(iddip,dal,al)
+{
+	if(al == null)
+		al = getMaxGiornoGiornaliera(iddip);
+	
+	dal = new Date(dal.getFullYear(),dal.getMonth(),dal.getDate() + 1);
+	
+	var recsGiorn = globals.getRecsGiornaliera(iddip,dal,al);
+	var arrIdGiornaliera = globals.foundsetToArray(recsGiorn,'idgiornaliera');
+	
+	var sqlPulisciGiorn = "DELETE FROM E2GiornalieraEventi WHERE idgiornaliera IN ("  +
+                          arrIdGiornaliera.map(function(id){return id}).join(',') + ")";
+
+    var success = plugins.rawSQL.executeSQL(globals.Server.MA_PRESENZE,
+                        globals.Table.GIORNALIERA_EVENTI,
+						sqlPulisciGiorn,
+						[]);
+
+	if(!success)
+	{
+		globals.ma_utl_showWarningDialog('Errore durante la cancellazione degli eventi nella tabella e2giornalieraeventi','Pulisci giornaliera eventi');
+		application.output(plugins.rawSQL.getException().getMessage(), LOGGINGLEVEL.ERROR);
+		return false;
+	}
+	
+	sqlPulisciGiorn = "DELETE FROM E2Giornaliera WHERE idgiornaliera IN ("  +
+					   arrIdGiornaliera.map(function(id){return id}).join(',') + ")"; 
+	
+    success = plugins.rawSQL.executeSQL(globals.Server.MA_PRESENZE,
+										globals.Table.GIORNALIERA,
+										sqlPulisciGiorn,
+										[]);
+	
+	if(!success)
+	{
+		globals.ma_utl_showWarningDialog('Errore durante la cancellazione degli eventi nella tabella e2giornaliera','Pulisci giornaliera eventi');
+		application.output(plugins.rawSQL.getException().getMessage(), LOGGINGLEVEL.ERROR);
+		return false;
+	}
+	
+	plugins.rawSQL.flushAllClientsCache(globals.Server.MA_PRESENZE,
+	                    globals.Table.GIORNALIERA_PROGFASCE);
+	
+	return true;
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * Restituisce l'ultimo giorno correntemente compilato in giornaliera per il dipendente
+ * 
+ * @param {Number} idDip
+ *
+ * @properties={typeid:24,uuid:"9C372ECA-F68B-4E7B-AC07-8AE8458BEB5C"}
+ */
+function getMaxGiornoGiornaliera(idDip)
+{
+	/** @type {JSFoundSet<db:/ma_presenze/e2giornaliera>} */
+	var fsGiorn = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.GIORNALIERA);
+	if(fsGiorn.find())
+	{
+		fsGiorn.iddip = idDip;
+		if(fsGiorn.search())
+		{
+			fsGiorn.sort('giorno desc');
+			return fsGiorn.giorno;
+		}
+	}
+	
+	return null;
+}
