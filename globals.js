@@ -2335,6 +2335,79 @@ function getQualifica(idlavoratore)
 }
 
 /**
+ * @AllowToRunInFind
+ * 
+ * Restituisce la descrizione della qualifica
+ * 
+ * @param {String} radiceQualifica
+ *
+ * @properties={typeid:24,uuid:"C4BF8E83-294A-449F-AE23-4C1381A59B3F"}
+ */
+function getDescQualifica(radiceQualifica)
+{
+	/** @type {JSFoundset<db:/ma_presenze/e2tabqualifiche>} */
+	var fs = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,'e2tabqualifiche');
+	if(fs.find())
+	{
+		fs.radicequalifica = radiceQualifica;
+		if(fs.search())
+			fs.descrizione;
+	}
+	
+	return null;
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * Restituisce il codice del contratto del lavoratore
+ * 
+ * @param {Number} idLavoratore
+ * 
+ * @return {Number}
+ * 
+ * @properties={typeid:24,uuid:"8A5D82E8-12C7-4038-B49E-F0A8F5AACC79"}
+ */
+function getContratto(idLavoratore)
+{
+	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+	var fs = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.LAVORATORI);
+	if(fs.find())
+	{
+		fs.idlavoratore = idLavoratore;
+		if(fs.search())
+			fs.codcontratto;
+	}
+	
+	return null;
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * Restituisce la descrizione del contratto richiesto
+ * 
+ * @param {Number} radiceContratto
+ * 
+ * @return {String}
+ * 
+ * @properties={typeid:24,uuid:"DDB9DCAD-A271-42EF-9A42-7475963D4FCD"}
+ */
+function getDescContratto(radiceContratto)
+{
+	/** @type {JSFoundset<db:/ma_presenze/e2tabgruppicontrattuali>} */
+	var fs = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,'e2tabgruppicontrattuali');
+	if(fs.find())
+	{
+		fs.radicecontratto = radiceContratto;
+		if(fs.search())
+			fs.descrizione;
+	}
+	
+	return null;
+}
+
+/**
  * Restituisce il codice della posizione INPS a partire dall'identificativo del lavoratore
  * 
  * @AllowToRunInFind
@@ -3489,6 +3562,29 @@ function getUserOrganizations(userId)
 	var dsUO = databaseManager.getDataSetByQuery(globals.Server.SVY_FRAMEWORK,sqlUO,arrUO,-1);
 	
 	return dsUO;
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * Restituisce il nome della sede di lavoro
+ *  
+ * @param {Number} idDittaSede
+ *
+ * @properties={typeid:24,uuid:"D3235D07-AAB0-43CB-8ACE-C7658E921B23"}
+ */
+function getCodSedeDiLavoro(idDittaSede)
+{
+	/** @type{JSFoundset<db:/ma_anagrafiche/ditte_sedi>}*/
+	var fsSedi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_SEDI);
+	if(fsSedi.find())
+	{
+		fsSedi.iddittasede = idDittaSede;
+		if(fsSedi.search())
+			return fsSedi.codice;
+	}
+	
+	return null;
 }
 
 /**
