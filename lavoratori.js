@@ -37,7 +37,7 @@ function ToSede(ids)
  */
 function sortByNominativo(arrIdLavoratori,tipologiaDitta)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 	var fsLav = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 	if(fsLav.find())
 	{

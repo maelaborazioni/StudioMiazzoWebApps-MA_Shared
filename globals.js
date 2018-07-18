@@ -891,7 +891,7 @@ function InitSharedVariables()
  */
 function getOpType(code)
 {
-	/** @type {JSFoundset<db:/ma_log/operationtype>} */
+	/** @type {JSFoundSet<db:/ma_log/operationtype>} */
 	var opTypeFs = databaseManager.getFoundSet(globals.Server.MA_LOG, globals.Table.OPERATION_TYPE);
 	if(opTypeFs && opTypeFs.find())
 	{
@@ -910,7 +910,7 @@ function getOpType(code)
  */
 function getOperation(opId)
 {
-	/** @type {JSFoundset<db:/ma_log/operationtype>} */
+	/** @type {JSFoundSet<db:/ma_log/operationtype>} */
 	var opTypeFs = databaseManager.getFoundSet(globals.Server.MA_LOG, globals.Table.OPERATION_TYPE);
 	if(opTypeFs && opTypeFs.find())
 	{
@@ -954,7 +954,7 @@ function convert_DitteCliente2Sede(value)
 	if(ditte.tipologia == globals.Tipologia.ESTERNA)
 		return value;
 	
-	/** @type {JSFoundset<db:/ma_anagrafiche/v_ditte_cliente2sede>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/v_ditte_cliente2sede>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, 'v_ditte_cliente2sede');
 	if (fs && fs.find())
 	{
@@ -977,7 +977,7 @@ function convert_DitteCliente2Sede(value)
  */
 function convert_DitteSede2Cliente(value)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/v_ditte_cliente2sede>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/v_ditte_cliente2sede>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, 'v_ditte_cliente2sede');
 	if (fs && fs.find())
 	{
@@ -1001,7 +1001,7 @@ function convert_LavoratoriSede2Cliente(value)
 	/**
 	 * Convert the id hq -> customer
 	 */
-	/** @type {JSFoundset<db:/ma_anagrafiche/v_lavoratori_cliente2sede>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/v_lavoratori_cliente2sede>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, 'v_lavoratori_cliente2sede');
 	if(fs && fs.find())
 	{
@@ -1025,7 +1025,7 @@ function convert_LavoratoriCliente2Sede(value)
 	/**
 	 * Convert the id customer -> hq
 	 */
-	 /** @type {JSFoundset<db:/ma_anagrafiche/v_lavoratori_cliente2sede>} */
+	 /** @type {JSFoundSet<db:/ma_anagrafiche/v_lavoratori_cliente2sede>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, 'v_lavoratori_cliente2sede');
 	if(fs && fs.find())
 	{
@@ -1143,7 +1143,7 @@ function getWebServiceResponse(url, params)
 			
 				if(responseObj.blocked)
 				{
-					/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+					/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 					var employeesFoundset = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.LAVORATORI);
 					if (employeesFoundset && employeesFoundset.find())
 					{
@@ -1488,7 +1488,7 @@ function getDittaRiferimento(idDittaInterinale)
  */
 function getCodiceDittaPrincipaleGruppoInstallazione(idGruppoInst)
 {
-	/** @type {JSFoundset<db:/ma_presenze/e2sediinstallazione>}*/
+	/** @type {JSFoundSet<db:/ma_presenze/e2sediinstallazione>}*/
 	var fsSedi = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.SEDI_INSTALLAZIONE);
 	if(fsSedi.find())
 	{
@@ -1548,7 +1548,7 @@ function getLavoratoriGruppo(params,idditta)
  */
 function getLavoratoriDalAl(dal,al)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 	if(fs.find())
 	{
@@ -1578,7 +1578,7 @@ function getLavoratoriDalAl(dal,al)
  */
 function getLavoratoriDittaDalAl(idDitta,dal,al)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 	if(fs.find())
 	{
@@ -1741,7 +1741,7 @@ function ma_utl_lav_convertId(idlavoratore)
  */
 function ma_utl_lav_cliente2Sede(idlavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.LAVORATORI);
 	if (fs && fs.find())
 	{
@@ -1798,7 +1798,7 @@ function ma_utl_ditta_toCliente(idditta)
  */
 function ma_utl_ditta_cliente2Sede(idditta)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.DITTE);
 	if (fs && fs.find())
 	{
@@ -1865,7 +1865,7 @@ function ma_utl_under_maintenance()
  */
 function getUserEmailAddress(iduser)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_to_lavoratori>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_to_lavoratori>} */
 	var fsUserLav = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_to_lavoratori');
 	
 	if(fsUserLav.find())
@@ -1942,7 +1942,7 @@ function ma_utl_hasKeySede()
  */
 function ma_utl_getSecurityKeyId(key_name)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_security_key>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_security_key>}*/
 	var fsSecKey = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_security_key');
 	if(fsSecKey.find())
 	{
@@ -1965,7 +1965,7 @@ function ma_utl_getSecurityKeyId(key_name)
  */
 function ma_utl_userGroupHasKey(group_id,key_id)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_right>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
 	var fsUserRight = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
     if(fsUserRight.find())
     {
@@ -1990,7 +1990,7 @@ function ma_utl_userGroupHasKey(group_id,key_id)
  */
 function ma_utl_userOrgHasKey(user_org_id,key_id)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_right>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
 	var fsUserRight = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
     if(fsUserRight.find())
     {
@@ -2023,7 +2023,7 @@ function ma_utl_userHasKey(userId, keyId, groupId, orgId)
 	var hasKey = false;
 	
 	// caso 1
-	/** @type {JSFoundset<db:/svy_framework/sec_user_right>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
 	var fsUserRight = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
     if(fsUserRight.find())
     {
@@ -2039,7 +2039,7 @@ function ma_utl_userHasKey(userId, keyId, groupId, orgId)
     }
 	
     // caso 2 
-    /** @type {JSFoundset<db:/svy_framework/sec_user_right>} */
+    /** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
 	var fsGroup = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
     if(fsGroup.find())
     {
@@ -2061,7 +2061,7 @@ function ma_utl_userHasKey(userId, keyId, groupId, orgId)
     }
     
     // caso 3
-    /** @type {JSFoundset<db:/svy_framework/sec_user_right>} */
+    /** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
 	var fsOrg = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
     if(fsOrg.find())
     {
@@ -2097,7 +2097,7 @@ function ma_utl_userHasKey(userId, keyId, groupId, orgId)
  */
 function ma_utl_getOwnerFromUserOrgId(user_org_id)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_org>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_org>} */
 	var fsUserOrg = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_org');
     if(fsUserOrg.find())
     {	
@@ -2141,7 +2141,7 @@ function getDitta(idlavoratore)
  */
 function getCodDitta(idditta)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
 	if(fs.find())
 	{
@@ -2164,7 +2164,7 @@ function getCodDitta(idditta)
  */
 function getIdDitta(codditta)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
 	if(fs.find())
 	{
@@ -2189,7 +2189,7 @@ function getIdDitta(codditta)
  */
 function getCodLavoratore(idlavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
     var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     if(fs.find())
     {
@@ -2212,7 +2212,7 @@ function getCodLavoratore(idlavoratore)
  */
 function getIdLavoratoreDaCodice(codLavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
     var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     if(fs.find())
     {
@@ -2237,7 +2237,7 @@ function getIdLavoratoreDaCodice(codLavoratore)
  */
 function getNominativo(idlavoratore)
 {	
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
     var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     /** @type {String}*/
     var nominativo = null;
@@ -2266,7 +2266,7 @@ function getNominativo(idlavoratore)
  */
 function getCognome(idlavoratore)
 {	
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
     var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     /** @type {String} */
     var cognome = null;
@@ -2295,7 +2295,7 @@ function getCognome(idlavoratore)
  */
 function getNome(idlavoratore)
 {	
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
     var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     /** @type {String} */
     var nome = null;
@@ -2322,7 +2322,7 @@ function getNome(idlavoratore)
  */
 function getQualifica(idlavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
     var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     if(fs.find()) 
     { 
@@ -2345,7 +2345,7 @@ function getQualifica(idlavoratore)
  */
 function getDescQualifica(radiceQualifica)
 {
-	/** @type {JSFoundset<db:/ma_presenze/e2tabqualifiche>} */
+	/** @type {JSFoundSet<db:/ma_presenze/e2tabqualifiche>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,'e2tabqualifiche');
 	if(fs.find())
 	{
@@ -2370,7 +2370,7 @@ function getDescQualifica(radiceQualifica)
  */
 function getContratto(idLavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.LAVORATORI);
 	if(fs.find())
 	{
@@ -2395,7 +2395,7 @@ function getContratto(idLavoratore)
  */
 function getDescContratto(radiceContratto)
 {
-	/** @type {JSFoundset<db:/ma_presenze/e2tabgruppicontrattuali>} */
+	/** @type {JSFoundSet<db:/ma_presenze/e2tabgruppicontrattuali>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,'e2tabgruppicontrattuali');
 	if(fs.find())
 	{
@@ -2420,7 +2420,7 @@ function getDescContratto(radiceContratto)
  */
 function getPosInpsLavoratore(idlavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
     var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     if(fs.find())
     {
@@ -2444,14 +2444,14 @@ function getPosInpsLavoratore(idlavoratore)
  */
 function getMailLavoratore(idlavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
     var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     if(fs.find()) 
     { 
 	   fs.idlavoratore = idlavoratore;
 	   if(fs.search())
 	   {
-		   /** @type {JSFoundset<db:/ma_anagrafiche/persone_recapiti>}*/
+		   /** @type {JSFoundSet<db:/ma_anagrafiche/persone_recapiti>}*/
 		   var fsRecapiti = fs.lavoratori_to_persone ? fs.lavoratori_to_persone.persone_to_persone_domicili.persone_domicili_to_persone_recapiti : '';
 		   if(fsRecapiti && fsRecapiti.find())
 		   {
@@ -2476,7 +2476,7 @@ function getMailLavoratore(idlavoratore)
  */
 function getMailUtente(userid)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_user>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user');
 	if(fs.find())
 	{
@@ -2500,7 +2500,7 @@ function getMailUtente(userid)
  */
 function getUserName(userId)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_user>} */
 	var fsUser = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user');
 	if(fsUser.find())
 	{
@@ -2520,14 +2520,14 @@ function getUserName(userId)
  * @param {Number} idlavoratore
  * @param {String} owner
  * 
- * @return {JSFoundset<db:/svy_framework/sec_user_to_lavoratori>}
+ * @return {JSFoundSet<db:/svy_framework/sec_user_to_lavoratori>}
  *
  * @properties={typeid:24,uuid:"951E85CA-4B9D-40BF-B962-9DC55EC15DBD"}
  * @AllowToRunInFind
  */
 function getUserFromIdLavoratore(idlavoratore,owner)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_to_lavoratori>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_to_lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_to_lavoratori');
 	if(fs.find())
 	{
@@ -2553,7 +2553,7 @@ function getUserFromIdLavoratore(idlavoratore,owner)
  */
 function getUserIdFromIdLavoratore(idlavoratore,owner)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_to_lavoratori>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_to_lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_to_lavoratori');
 	if(fs.find())
 	{
@@ -2582,7 +2582,7 @@ function getUserIdFromIdLavoratore(idlavoratore,owner)
  */
 function getNrBadge(idlavoratore,giorno,occasionale)
 {
-	/** @type{JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+	/** @type{JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);		
 	if (fs.loadRecords(idlavoratore)
 			&& fs.lavoratori_to_e2dcg_decorrenza_badge 
@@ -2613,7 +2613,7 @@ function getNrBadge(idlavoratore,giorno,occasionale)
  */
 function getPercentualePartTime(idLavoratore)
 {
-	/** @type{JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+	/** @type{JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 	if(fs.find())
 	{
@@ -2636,7 +2636,7 @@ function getPercentualePartTime(idLavoratore)
  */
 function getRagioneSociale(idDitta)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
 	if(fs.find())
 	{
@@ -2658,7 +2658,7 @@ function getRagioneSociale(idDitta)
  */
 function getIdCommessaDaCodice(codCommessa)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse>}*/
 	var fsComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_COMMESSE);
 	if(fsComm.find())
 	{
@@ -2681,7 +2681,7 @@ function getIdCommessaDaCodice(codCommessa)
  */
 function getIdCommessaDaIdFase(idCommessaFase)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
 	var fsComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_COMMESSE_FASI);
 	if(fsComm.find())
 	{
@@ -2704,7 +2704,7 @@ function getIdCommessaDaIdFase(idCommessaFase)
  */
 function getIdFaseCommessaDaCodice(codCommessaFase)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
 	var fsComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_COMMESSE_FASI);
 	if(fsComm.find())
 	{
@@ -2729,7 +2729,7 @@ function getIdFaseCommessaDaCodice(codCommessaFase)
  */
 function getCodiceCommessaDitta(idDittaCommessa)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse>}*/
 	var fsComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_COMMESSE);
 	if(fsComm.find())
 	{
@@ -2754,7 +2754,7 @@ function getCodiceCommessaDitta(idDittaCommessa)
  */
 function getDescrizioneCommessaDitta(idDittaCommessa)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse>}*/
 	var fsComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_COMMESSE);
 	if(fsComm.find())
 	{
@@ -2776,7 +2776,7 @@ function getDescrizioneCommessaDitta(idDittaCommessa)
  */
 function getCodiceClienteDaIdFase(idDittaCommessaFase)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
 	var fsComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_COMMESSE_FASI);
 	if(fsComm.find())
 	{
@@ -2801,7 +2801,7 @@ function getCodiceClienteDaIdFase(idDittaCommessaFase)
  */
 function getCodiceCommessaDittaDaIdFase(idDittaCommessaFase)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
 	var fsComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_COMMESSE_FASI);
 	if(fsComm.find())
 	{
@@ -2826,7 +2826,7 @@ function getCodiceCommessaDittaDaIdFase(idDittaCommessaFase)
  */
 function getCodiceFaseCommessaDitta(idDittaCommessaFase)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
 	var fsComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_COMMESSE_FASI);
 	if(fsComm.find())
 	{
@@ -2851,7 +2851,7 @@ function getCodiceFaseCommessaDitta(idDittaCommessaFase)
  */
 function getIdLavoratoreFromCodiceDitta(codLavoratore,codDitta)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     if(fs.find())
     {
@@ -2876,7 +2876,7 @@ function getIdLavoratoreFromCodiceDitta(codLavoratore,codDitta)
  */
 function isFemmina(idLavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 	if(fs.find())
 	{
@@ -2899,7 +2899,7 @@ function isFemmina(idLavoratore)
  */
 function isSocioCollaboratore(idLavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 	if(fs.find())
 	{
@@ -3009,7 +3009,7 @@ function getServerTimbrature()
  */
 function getOrganizationId(user_org_id)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_org>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_org>}*/
 	var fsOrg = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_org');
 	if(fsOrg.find())
 	{
@@ -3070,7 +3070,7 @@ function getDateOfISOWeek(w, y)
  */
 function isDaAutorizzareInPresenze(idDittaCommessaFase)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
 	var fsDitteCommFasi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.DITTE_COMMESSE_FASI);
 	if(fsDitteCommFasi.find())
 	{
@@ -3095,7 +3095,7 @@ function isDaAutorizzareInPresenze(idDittaCommessaFase)
  */
 function isDaAutorizzarePerFatturazione(idDittaCommessaFase)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
 	var fsDitteCommFasi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.DITTE_COMMESSE_FASI);
 	if(fsDitteCommFasi.find())
 	{
@@ -3118,7 +3118,7 @@ function isDaAutorizzarePerFatturazione(idDittaCommessaFase)
  * @properties={typeid:24,uuid:"FEEB9B8F-DC3C-461E-B0D8-A49493BCDAFB"}
  */
 function getDittaCommessaFaseDaCommessaGiornaliera(commGiornId) {
-	/** @type {JSFoundset<db:/ma_presenze/commesse_giornaliera>}*/
+	/** @type {JSFoundSet<db:/ma_presenze/commesse_giornaliera>}*/
 	var fsCommesseGiorn = databaseManager.getFoundSet(globals.Server.MA_PRESENZE, globals.Table.COMMESSE_GIORNALIERA);
 	if (fsCommesseGiorn.find()) {
 		fsCommesseGiorn.idcommessagiornaliera = commGiornId;
@@ -3145,7 +3145,7 @@ function getArrFasiCommessa(arrIdCommesse)
 {
 	/** @type {Array<Number>} */
 	var arrFasiComm = [];
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_commesse_fasi>}*/
 	var fsDitteComm = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.DITTE_COMMESSE_FASI);
 	if(fsDitteComm.find())
 	{
@@ -3187,7 +3187,7 @@ function getNumSettimaneAnno(anno)
  */
 function getCodiceModulo(idTabServizio)
 {
-	/** @type{JSFoundset<db:/ma_anagrafiche_generale/tab_swcategorie>}*/
+	/** @type{JSFoundSet<db:/ma_anagrafiche_generale/tab_swcategorie>}*/
 	var fsTabCategoria = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE_GENERALE,globals.Table.TAB_SWCATEGORIE);
 	if(fsTabCategoria.find())
 	{
@@ -3213,7 +3213,7 @@ function getCodiceModulo(idTabServizio)
  */
 function getIdModuloProprietario(nomeModulo)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_module>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_module>}*/
 	var fsModule = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_module');
 	if(fsModule.find())
 	{
@@ -3242,7 +3242,7 @@ function ma_utl_getSoftware(module,ownerID)
 	var fs;
 	if(ownerID)
 	{
-		/** @type {JSFoundset<db:/svy_framework/sec_owner_in_module>} */
+		/** @type {JSFoundSet<db:/svy_framework/sec_owner_in_module>} */
 		fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_owner_in_module');
 		fs.find();
 		fs.owner_id = ownerID;
@@ -3278,7 +3278,7 @@ function ma_utl_hasSoftware(arrSwName,ownerID)
 	var fs;
 	if(ownerID)
 	{
-		/** @type {JSFoundset<db:/svy_framework/sec_owner_in_module>} */
+		/** @type {JSFoundSet<db:/svy_framework/sec_owner_in_module>} */
 		fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_owner_in_module');
 		fs.find();
 		fs.owner_id = ownerID;
@@ -3335,7 +3335,7 @@ function ma_utl_getAllSoftwares(ownerID)
  */
 function getIdTabSoftwareFromCodice(arrCodSw)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/tab_sw>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/tab_sw>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.TAB_SW);
 	if(fs.find())
 	{
@@ -3357,7 +3357,7 @@ function getIdTabSoftwareFromCodice(arrCodSw)
  */
 function getDescrizioneTipoIndirizzo(codTipoIndirizzo)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/tab_tipiindirizzo>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/tab_tipiindirizzo>} */
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,'tab_tipiindirizzo');
 	if(fs.find())
 	{
@@ -3382,7 +3382,7 @@ function getDescrizioneTipoIndirizzo(codTipoIndirizzo)
  */
 function getGruppoDitte(idDitta)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/gruppi_ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/gruppi_ditte>} */
 	var fsGruppi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.GRUPPI_DITTE);
 	if(fsGruppi.find())
 	{
@@ -3407,7 +3407,7 @@ function getGruppoDitte(idDitta)
  */
 function getGruppiClassificazioneDettaglio(idGruppoClassificazione)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/gruppi_classificazionidettaglio>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/gruppi_classificazionidettaglio>}*/
 	var fsGrClDett = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.GRUPPI_CLASSIFICAZIONI_DETTAGLIO);
 	if(fsGrClDett.find())
 	{
@@ -3575,7 +3575,7 @@ function getUserOrganizations(userId)
  */
 function getCodSedeDiLavoro(idDittaSede)
 {
-	/** @type{JSFoundset<db:/ma_anagrafiche/ditte_sedi>}*/
+	/** @type{JSFoundSet<db:/ma_anagrafiche/ditte_sedi>}*/
 	var fsSedi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_SEDI);
 	if(fsSedi.find())
 	{
@@ -3598,7 +3598,7 @@ function getCodSedeDiLavoro(idDittaSede)
  */
 function getNomeSedeDiLavoro(idDittaSede)
 {
-	/** @type{JSFoundset<db:/ma_anagrafiche/ditte_sedi>}*/
+	/** @type{JSFoundSet<db:/ma_anagrafiche/ditte_sedi>}*/
 	var fsSedi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_SEDI);
 	if(fsSedi.find())
 	{
@@ -3621,7 +3621,7 @@ function getNomeSedeDiLavoro(idDittaSede)
  */
 function getParameterValue(idDitta,parameterType)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_giustificativiparametri>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_giustificativiparametri>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_GIUSTIFICATIVI_PARAMETRI);
     if(fs.find())
     {
@@ -3631,7 +3631,7 @@ function getParameterValue(idDitta,parameterType)
     	   return fs.valore;
     	else
     	{
-    		/** @type {JSFoundset<db:/ma_common/tab_giustificativiparametrivalori>}*/
+    		/** @type {JSFoundSet<db:/ma_common/tab_giustificativiparametrivalori>}*/
     		var fsVal = databaseManager.getFoundSet(globals.Server.MA_COMMON,'tab_giustificativiparametrivalori');
     		if(fsVal.find())
     		{
@@ -3656,7 +3656,7 @@ function getParameterValue(idDitta,parameterType)
  */
 function getIdTabGiustificativoParametroFromCodice(codParameter)
 {
-	/** @type {JSFoundset<db:/ma_common/tab_giustificativiparametri>}*/
+	/** @type {JSFoundSet<db:/ma_common/tab_giustificativiparametri>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_COMMON,'tab_giustificativiparametri');
 	if(fs.find())
 	{
@@ -3676,7 +3676,7 @@ function getIdTabGiustificativoParametroFromCodice(codParameter)
  */
 function getCodiceParametro(idTabGiustificativoParam)
 {
-	/** @type {JSFoundset<db:/ma_common/tab_giustificativiparametri>}*/
+	/** @type {JSFoundSet<db:/ma_common/tab_giustificativiparametri>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_COMMON,globals.Table.TAB_GIUSTIFICATIVI_PARAMETRI);
     if(fs.find())
     {
@@ -3695,7 +3695,7 @@ function getCodiceParametro(idTabGiustificativoParam)
  */
 function getDescrizioneParametro(idTabGiustificativoParam)
 {
-	/** @type {JSFoundset<db:/ma_common/tab_giustificativiparametri>}*/
+	/** @type {JSFoundSet<db:/ma_common/tab_giustificativiparametri>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_COMMON,globals.Table.TAB_GIUSTIFICATIVI_PARAMETRI);
     if(fs.find())
     {
@@ -3714,7 +3714,7 @@ function getDescrizioneParametro(idTabGiustificativoParam)
  */
 function getCodiceParametroValore(idTabGiustificativoValoreParam)
 {
-	/** @type {JSFoundset<db:/ma_common/tab_giustificativiparametrivalori>}*/
+	/** @type {JSFoundSet<db:/ma_common/tab_giustificativiparametrivalori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_COMMON,globals.Table.TAB_GIUSTIFICATIVI_VALORI);
     if(fs.find())
     {
@@ -3733,7 +3733,7 @@ function getCodiceParametroValore(idTabGiustificativoValoreParam)
  */
 function getDescrizioneParametroValore(idTabGiustificativoValoreParam)
 {
-	/** @type {JSFoundset<db:/ma_common/tab_giustificativiparametrivalori>}*/
+	/** @type {JSFoundSet<db:/ma_common/tab_giustificativiparametrivalori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_COMMON,globals.Table.TAB_GIUSTIFICATIVI_VALORI);
     if(fs.find())
     {
@@ -3757,7 +3757,7 @@ function getDescrizioneParametroValore(idTabGiustificativoValoreParam)
  */
 function haOrologio(idditta)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_presenze>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_presenze>}*/
 	var fsOrologio = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_PRESENZE); 
 	if(fsOrologio.find())
 	{
@@ -3792,7 +3792,7 @@ function haGestioneTurno(idditta)
 	else
 		arrTurno = [idditta];
 	
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte_presenze>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte_presenze>} */
 	var fsPresenze = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE_PRESENZE);
 	if(fsPresenze.find())
 	{
@@ -3839,7 +3839,7 @@ function getGruppoInstallazioneDitta(idDitta)
 {
 	var idGruppoInstallazione = null;
 	
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
 	if (fs.find())
 	{
@@ -3876,7 +3876,7 @@ function getGruppoInstallazioneDitta(idDitta)
  */
 function getGruppoInstallazioneLavoratore(idLavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 	if(fs.find())
 	{
@@ -3899,7 +3899,7 @@ function getGruppoInstallazioneLavoratore(idLavoratore)
  */
 function getDitteStandard()
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
     if(fsDitte.find())
     {
@@ -3918,7 +3918,7 @@ function getDitteStandard()
  */
 function getDitteControllate()
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
     if(fsDitte.find())
     {
@@ -3937,7 +3937,7 @@ function getDitteControllate()
  */
 function getDitteControllateNonEsterne()
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
     if(fsDitte.find())
     {
@@ -3956,7 +3956,7 @@ function getDitteControllateNonEsterne()
  */
 function getDitteControllateNonGestiteStudio()
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
     if(fsDitte.find())
     {
@@ -3978,7 +3978,7 @@ function getDitteControllateNonGestiteStudio()
  */
 function getDitteEsterne()
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
     if(fsDitte.find())
     {
@@ -4000,7 +4000,7 @@ function getDitteEsterne()
  */
 function getDitteInterinali()
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
     if(fsDitte.find())
     {
@@ -4023,7 +4023,7 @@ function getDitteInterinali()
  */
 function getDitteFornitori()
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
     if(fsDitte.find())
     {
@@ -4045,7 +4045,7 @@ function getDitteFornitori()
  */
 function getDitteClienti()
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
     if(fsDitte.find())
     {
@@ -4073,7 +4073,7 @@ function getIdTabSwFromCodice(codCateg)
 	/** @type {Array<Number>} */
 	var arrIdTabSw = [];
 	
-	/** @type {JSFoundset<db:/ma_anagrafiche/tab_sw>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/tab_sw>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,'tab_sw');
 	if(fs.find())
 	{
@@ -4363,7 +4363,7 @@ function getNomeMese(numMese){
  */
 function getDescrizioneEvento(idEvento)
 {
-	/** @type {JSFoundset<db:/ma_presenze/e2eventi>}*/
+	/** @type {JSFoundSet<db:/ma_presenze/e2eventi>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.EVENTI);
     if(fs.find())
     {
@@ -4387,7 +4387,7 @@ function getDescrizioneEvento(idEvento)
  */
 function getIdLavoratoreFromUserId(userid,owner)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_to_lavoratori>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_to_lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_to_lavoratori');
 	if(fs.find())
 	{
@@ -4412,7 +4412,7 @@ function getIdLavoratoreFromUserId(userid,owner)
  */
 function getDataAssunzione(idLavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     if(fs.find())
     {
@@ -4434,7 +4434,7 @@ function getDataAssunzione(idLavoratore)
  */
 function getDataCessazione(idLavoratore)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
     if(fs.find())
     {
@@ -4459,7 +4459,7 @@ function getDataCessazione(idLavoratore)
  */
 function getEventiAbilitati(idDitta,idTabCategoriaSw)
 {
-	/** @type {JSFoundset<db:/ma_presenze/e2eventiabilitazioni>}*/
+	/** @type {JSFoundSet<db:/ma_presenze/e2eventiabilitazioni>}*/
 	var fsEvAbil = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.EVENTI_ABILITAZIONI);
 	
 	fsEvAbil.find();
@@ -4484,7 +4484,7 @@ function getEventiAbilitati(idDitta,idTabCategoriaSw)
  */
 function getProgrammazioneFasceDalAl(idLav,giornoDal,giornoAl)
 {
-	/** @type {JSFoundset<db:/ma_presenze/e2giornalieraprogfasce>} */
+	/** @type {JSFoundSet<db:/ma_presenze/e2giornalieraprogfasce>} */
 	var fsFasceProg = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.GIORNALIERA_PROGFASCE);
 	if(fsFasceProg.find())
 	{
