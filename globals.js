@@ -803,6 +803,13 @@ var WS_REPORT_URL = null;
 /**
  * @type {String}
  * 
+ * @properties={typeid:35,uuid:"1D7D6EEC-7843-4174-8162-A4833C5A1666"}
+ */
+var WS_REPORT_GIORNALIERA_URL = null;	
+
+/**
+ * @type {String}
+ * 
  * @properties={typeid:35,uuid:"E350187E-92F3-4CBA-8E24-EAF8477E6E27"}
  */
 var WS_LU_URL = null;
@@ -2022,68 +2029,80 @@ function ma_utl_userHasKey(userId, keyId, groupId, orgId)
 {
 	var hasKey = false;
 	
-	// caso 1
-	/** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
-	var fsUserRight = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
-    if(fsUserRight.find())
-    {
-    	fsUserRight.security_key_id = keyId;
-    	fsUserRight.is_denied != 1;
-    	fsUserRight.user_id = userId;
-    	    	
-    	if(fsUserRight.search())
-    	{
-    		hasKey = true;
-    	    return hasKey;
-    	}
-    }
+	if(userId instanceof String)
+	   userId = parseInt(userId,10)
 	
-    // caso 2 
-    /** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
-	var fsGroup = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
-    if(fsGroup.find())
-    {
-    	fsGroup.security_key_id = keyId;
-    	fsGroup.is_denied != 1;
-    	var dsGroup = getUserGroups(userId);
-    	if(dsGroup.getMaxRowIndex())
-    	   fsGroup.group_id = dsGroup.getColumnAsArray(1);
-    	
-    	if(groupId)
-    	   fsGroup.group_id = groupId;
-    	
-    	if(fsGroup.search())
+	try
+	{
+		// caso 1
+		/** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
+		var fsUserRight = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
+	    if(fsUserRight.find())
 	    {
-	    	hasKey = true;
-	        return hasKey;
+	    	fsUserRight.security_key_id = keyId;
+	    	fsUserRight.is_denied != 1;
+	    	fsUserRight.user_id = userId;
+	    	    	
+	    	if(fsUserRight.search())
+	    	{
+	    		hasKey = true;
+	    	    return hasKey;
+	    	}
 	    }
-    	
-    }
-    
-    // caso 3
-    /** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
-	var fsOrg = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
-    if(fsOrg.find())
-    {
-    	fsOrg.security_key_id = keyId;
-    	fsOrg.is_denied != -1;
-    	
-    	var dsOrgs = getUserOrganizations(userId);
-    	if(dsOrgs.getMaxRowIndex())
-    	   fsOrg.user_org_id = dsGroup.getColumnAsArray(1);
-
-    	if(orgId)
-    		fsOrg.user_org_id = orgId; 
-    	
-    	if(fsOrg.search())
+		
+	    // caso 2 
+	    /** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
+		var fsGroup = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
+	    if(fsGroup.find())
 	    {
-	    	hasKey = true;
-	        return hasKey;
+	    	fsGroup.security_key_id = keyId;
+	    	fsGroup.is_denied != 1;
+	    	var dsGroup = getUserGroups(userId);
+	    	if(dsGroup.getMaxRowIndex())
+	    	   fsGroup.group_id = dsGroup.getColumnAsArray(1);
+	    	
+	    	if(groupId)
+	    	   fsGroup.group_id = groupId;
+	    	
+	    	if(fsGroup.search())
+		    {
+		    	hasKey = true;
+		        return hasKey;
+		    }
+	    	
 	    }
-    	
-    }
-    
-	return hasKey;
+	    
+	    // caso 3
+	    /** @type {JSFoundSet<db:/svy_framework/sec_user_right>} */
+		var fsOrg = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
+	    if(fsOrg.find())
+	    {
+	    	fsOrg.security_key_id = keyId;
+	    	fsOrg.is_denied != -1;
+	    	
+	    	var dsOrgs = getUserOrganizations(userId);
+	    	if(dsOrgs.getMaxRowIndex())
+	    	   fsOrg.user_org_id = dsGroup.getColumnAsArray(1);
+	
+	    	if(orgId)
+	    		fsOrg.user_org_id = orgId; 
+	    	
+	    	if(fsOrg.search())
+		    {
+		    	hasKey = true;
+		        return hasKey;
+		    }
+	    	
+	    }
+	}
+	catch(ex)
+	{
+		application.output('Metodo ma_utl_userHasKey : ' + ex.message,LOGGINGLEVEL.ERROR);
+	}
+	finally
+	{
+		return hasKey;
+	}
 }
 
 /**
