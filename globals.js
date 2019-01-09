@@ -174,7 +174,8 @@ var Module =
 	COMUNICAZIONI: 'COM',
 	COMMESSE : 'COMM',
 	SCADENZIARIO: 'SW',
-	UTILITY: 'UTL'	
+	UTILITY: 'UTL',
+	FESTIVITA_STANDARD: 'FSSTD'
 }
 
 /**
@@ -216,6 +217,7 @@ var Key =
 	TIMBR_DIPENDENTE_WEB     : 'Timbrature dipendente web',
 	CARTOLINA_DIPENDENTE     : 'Cartolina dipendente',
 	TIMBR_DIPENDENTE_ELIMINA : 'Timbrature dipendente elimina',
+	TIMBR_DIPENDENTE_CAMBIO_SENSO : 'Timbrature dipendente cambio senso',
 	GESTIONE_ANOMALIE        : 'Gestione anomalie',
 	GESTIONE_SQUADRATURE     : 'Gestione squadrature',
 	DEMO                     : 'DEMO',
@@ -243,6 +245,7 @@ var Key =
 	LOOKUP                   : 'Lookup',
 	REQUIRED_FIELDS          : 'Required fields',
 	NON_INVIARE_MAIL         : 'Non inviare mail',
+	NON_RICEVERE_MAIL        : 'Non ricevere mail',
 	NETTO_LORDO              : 'NL',
 	// gestione chiavi AD
 	MAGNACARTA               : 'Magnacarta',
@@ -487,6 +490,7 @@ var Table =
 	LAVORATORI_CAMPI_DETTAGLIO      : 'lavoratori_richiestecampi_dettaglio',
 	LAVORATORI_VOCITARIFFA          : 'lavoratori_vocitariffa',
 	LAVORATORI_DECORRENZE           : 'e2dcg_decorrenza',
+	DECORRENZE_CAMPI                : 'e2dcg_campi',
 	DETTAGLIO_RICHIESTE				: 'tab_richiestedettaglio',
 	CAMPI_RICHIESTE					: 'tab_richiestedettagliocampi',
 	QUERY_CAMPI_RICHIESTE			: 'tab_richiestedettagliocampi_query',
@@ -1563,7 +1567,7 @@ function getLavoratoriDalAl(dal,al)
 		fs.cessazione = '^||>=' + utils.dateFormat(dal,globals.ISO_DATEFORMAT);
 	    if(fs.search())
 	    {
-	    	fs.sort('lavoratori_to_persone.nominativo asc');
+	    	fs.sort('nominativo asc');
 	       	return globals.foundsetToArray(fs,'idlavoratore');
 	    }
 	}
@@ -1574,7 +1578,7 @@ function getLavoratoriDalAl(dal,al)
 /**
  * Restituisce l'array con gli id dei lavoratori della ditta richiesta attivi nel periodo richiesto
  * 
- * @param {Number} idDitta
+ * @param {Array<Number>} arrDitte
  * @param {Date} [dal]
  * @param {Date} [al]
  *
@@ -1583,13 +1587,13 @@ function getLavoratoriDalAl(dal,al)
  * @properties={typeid:24,uuid:"84B2AE4E-3F95-4C45-B1E3-2C895E69D4B3"}
  * @AllowToRunInFind
  */
-function getLavoratoriDittaDalAl(idDitta,dal,al)
+function getLavoratoriDittaDalAl(arrDitte,dal,al)
 {
 	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 	if(fs.find())
 	{
-		fs.idditta = idDitta;
+		fs.idditta = arrDitte;
 		if(al)
 		   fs.assunzione = '<=' + utils.dateFormat(al,globals.ISO_DATEFORMAT) + '|yyyyMMdd';
 		if(dal)
@@ -1597,7 +1601,7 @@ function getLavoratoriDittaDalAl(idDitta,dal,al)
 	    
 		if(fs.search())
 	    {
-	    	fs.sort('lavoratori_to_persone.nominativo asc');
+	    	fs.sort('nominativo asc');
 	    	return globals.foundsetToArray(fs,'idlavoratore');
 	    }
 	}
