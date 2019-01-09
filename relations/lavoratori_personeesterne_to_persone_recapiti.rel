@@ -1,0 +1,12 @@
+allowCreationRelatedRecords:true,
+allowParentDeleteWhenHavingRelatedRecords:false,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/ma_anagrafiche/persone_recapiti",
+items:[
+{foreignColumnName:"codicefiscale",primaryDataProviderID:"codicefiscale",typeid:23,uuid:"53B0B178-245E-4A22-9568-C462CAA82373"}
+],
+joinType:1,
+name:"lavoratori_personeesterne_to_persone_recapiti",
+primaryDataSource:"db:/ma_anagrafiche/lavoratori_personeesterne",
+typeid:22,
+uuid:"FB113C5F-CDC4-46AE-8768-639CA99C28B4"
