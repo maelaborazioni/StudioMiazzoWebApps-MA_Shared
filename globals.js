@@ -4640,3 +4640,159 @@ function getMaxGiornoGiornaliera(idDip)
 	
 	return null;
 }
+
+/**
+ * Restituisce la data relativa all'n-esimo giorno del periodo corrente
+ *  
+ * @param {Number} n 
+ * @param {Number} m
+ * @param {Number} y
+ * 
+ * @return {Date}
+ * 
+ * @properties={typeid:24,uuid:"E8DD91E3-81EA-4434-B0E6-FA04AA3F549D"}
+ */
+function getGiornoMese(n,m,y)
+{
+	return new Date(y, m, n);
+}
+
+/**
+ * Restituisce l' m-esimo giorno lavorativo del periodo successivo alla data della richiesta
+ *
+ * @param {Date} day
+ * @param {Number} n l'indice dell'n-esimo giorno lavorativo richiesto
+ *
+ * @properties={typeid:24,uuid:"0A1B2E9E-E031-4BA4-A147-7A4A84CD1A55"}
+ */
+function getGiornoLavorativoMeseSucc(day,n)
+{
+	var dayMs = getNextPeriodFirstDate(day);
+	
+	var arrFestivita = getFestivitaStandard();
+	var cont = 0;
+	var g = 1;
+	var giorno = null;
+	while(g <= 31)  // or simply true...
+	{
+		giorno = new Date(dayMs.getFullYear(), dayMs.getMonth(), dayMs.getDate() + g - 1);
+		
+		if(arrFestivita.indexOf(globals.dateFormat(giorno,globals.ISO_DATEFORMAT)) == -1)
+		   cont++;
+		if(cont == n)
+		   break;
+		
+		g++;
+	}
+	
+	return giorno;
+}
+
+
+
+/**
+ * @properties={typeid:24,uuid:"36B60B52-5ABE-4C6D-8BF1-A73D665B63D7"}
+ */
+function getFestivitaStandard()
+{
+	var currYear = globals.TODAY.getFullYear();
+	//Pasqua
+	var pasqua = getPasqua(currYear);
+	var nextPasqua = getPasqua(currYear + 1);
+	//Pasquetta
+	var pasquetta = new Date(pasqua.getFullYear(), pasqua.getMonth(), pasqua.getDate() + 1);
+	var nextPasquetta = new Date(nextPasqua.getFullYear(), nextPasqua.getMonth(), nextPasqua.getDate() + 1);;
+	
+	return [
+	// Capodanno
+	globals.dateFormat(new Date(currYear,0,1),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,0,1),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,0,1),globals.ISO_DATEFORMAT),
+	// Epifania
+	globals.dateFormat(new Date(currYear,0,6),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,0,6),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,0,6),globals.ISO_DATEFORMAT),
+	// 25 Aprile
+	globals.dateFormat(new Date(currYear,3,25),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,3,25),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,3,25),globals.ISO_DATEFORMAT),
+	// 1 Maggio
+	globals.dateFormat(new Date(currYear,4,1),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,4,1),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,4,1),globals.ISO_DATEFORMAT),
+	// 2 Giugno Festa della Repubblica
+	globals.dateFormat(new Date(currYear,5,2),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,5,2),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,5,2),globals.ISO_DATEFORMAT),
+	// 15 Agosto Assunzione 
+	globals.dateFormat(new Date(currYear,7,15),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,7,15),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,7,15),globals.ISO_DATEFORMAT),
+	// 1 Novembre Tutti i Santi
+	globals.dateFormat(new Date(currYear,10,1),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,10,1),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,10,1),globals.ISO_DATEFORMAT),
+	// 8 Dicembre 
+	globals.dateFormat(new Date(currYear,11,8),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,11,8),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,11,8),globals.ISO_DATEFORMAT),
+	// 25 Dicembre Natale
+	globals.dateFormat(new Date(currYear,11,25),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,11,25),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,11,25),globals.ISO_DATEFORMAT),
+	// 26 Dicembre Santo Stefano
+	globals.dateFormat(new Date(currYear,11,26),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear - 1,11,26),globals.ISO_DATEFORMAT),
+	globals.dateFormat(new Date(currYear + 1,11,26),globals.ISO_DATEFORMAT),
+	// Pasqua
+	globals.dateFormat(pasqua,globals.ISO_DATEFORMAT),
+	globals.dateFormat(nextPasqua,globals.ISO_DATEFORMAT),
+	// Pasquetta
+	globals.dateFormat(pasquetta,globals.ISO_DATEFORMAT),
+	globals.dateFormat(nextPasquetta,globals.ISO_DATEFORMAT)
+	];
+}
+
+/**
+ * TODO generated, please specify type and doc for the params
+ * @param {Number} year
+ * 
+ * @return Date
+ * 
+ * @properties={typeid:24,uuid:"F6EFD74E-B978-4023-9056-BDECA857CF2C"}
+ */
+function getPasqua(year)
+{
+	var M = 0;
+	var N = 0;
+	
+	if(year >= 1900 && year <= 2099)
+	{
+		M = 24;
+		N = 5;
+	}
+	else if(year >= 2100 && year <= 2199)
+	{
+		M = 24;
+		N = 6;
+	}
+	
+	var _a = year % 19;
+	var _b = year % 4;
+	var _c = year % 7;
+	var _d = (19 * _a + M) % 30;
+	var _e = (2 * _b + 4 * _c + 6 * _d + N) % 7;
+	
+	var date;
+	if(_d + _e < 10)
+		date = new Date(year, 2, _d + _e + 22);
+	else
+		date = new Date(year, 3, _d + _e - 9); 
+	
+	if(date == new Date(year, 3, 26))
+	   date = new Date(year, 3, 19);
+	if(date == new Date(year, 3, 25) && _d == 28 && _e == 6 && _a > 10)
+		   date = new Date(year, 3, 18);
+	
+	return date;
+}
