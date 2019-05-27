@@ -59,6 +59,7 @@ var URI_FTP_MAGNACARTA = 'magnacarta.studiomiazzo.it';
  */
 var Security =
 { 
+	FTP_GIORNALIERE : {user : 'studiomi@studiomiazzo.it', password : 'hgtruvza'},
 	FTP_SITO: { user: 'servoy', password: 'WETy73rtwqw' },
 	FTP_MAGNACARTA: { user: 'admin', password: 'dfsan32' }
 };
@@ -218,6 +219,7 @@ var Key =
 	CARTOLINA_DIPENDENTE     : 'Cartolina dipendente',
 	TIMBR_DIPENDENTE_ELIMINA : 'Timbrature dipendente elimina',
 	TIMBR_DIPENDENTE_CAMBIO_SENSO : 'Timbrature dipendente cambio senso',
+	TIMBR_DIPENDENTE_CAUSALIZZATE : 'Timbrature dipendente causalizzate', 
 	GESTIONE_ANOMALIE        : 'Gestione anomalie',
 	GESTIONE_SQUADRATURE     : 'Gestione squadrature',
 	DEMO                     : 'DEMO',
@@ -261,8 +263,10 @@ var Key =
     AUT_VC_LIVELLO_GERARCHICO: 'Autorizzazioni visualizza copertura livello foglia',
 	AUT_VC_TUTTI             : 'Autorizzazioni visualizza copertura tutti',
 	ENGLISH_LAN              : 'English language',
+	AUT_UPDATE_CESSATI       : 'Autorizzazioni update cessati', 
 	// gestione chiavi NEG
 	NEGOZIO                  : 'Programmazione negozio',
+	NEGOZIO_BLOCCO           : 'Programmazione negozio blocchi',
 	// gestione chiavi COMM
 	COMMESSE_UTENTE          : 'Programmazione commesse utente',
 	COMMESSE_GESTORE         : 'Programmazione commesse gestore',
@@ -271,7 +275,10 @@ var Key =
 	COMMESSE_FATTURA         : 'Programmazione commesse fattura',
 	// gestione chiavi RETE
 	RETE_IMPRESA             : 'Rete impresa',
-	RETE_IMPRESA_GESTORE     : 'Rete impresa gestore'
+	RETE_IMPRESA_GESTORE     : 'Rete impresa gestore',
+	// gestione chiavi schedulatore
+	SCHEDULATORE             : 'Schedulatore',
+	SCHEDULATORE_GESTIONE    : 'Schedulatore gestione'
 }
 
 /**
@@ -324,7 +331,6 @@ var PRESENZA_SEMPLICE_GROUP = ['Cliente','Ditta EW','Lavoratori EW','Report EW',
  * @properties={typeid:35,uuid:"F863DC96-9B3B-486E-9DC8-8888051BD858",variableType:-4}
  */
 var PRESENZA_SEMPLICE_GESTIONE_GROUP = ['']
-
 /**
  * @type {Array}
  *
@@ -539,8 +545,10 @@ var Table =
 	TAB_ATTIVITA                    : 'e2wk_tabattivita',
 	SYSTEM_NEWS                     : 'system_news',
 	SYSTEM_NEWS_SERVICES            : 'system_news_services',
-	UTENTI_NEWS_READ                : 'utenti_newsread'
-		
+	UTENTI_NEWS_READ                : 'utenti_newsread',
+	NOTIFICATION_REQUESTS           : 'notification_requests',
+	NOTIFICATION_SUBSCRIBERS        : 'notification_subscribers',
+	LOG_SCHEDULER                   : 'schedulerconfiguration'
 }
 
 /**
@@ -880,6 +888,13 @@ var WS_OP_URL = null;
  * @properties={typeid:35,uuid:"D9C8D685-CA61-47DA-96A2-4827F6A3F115"}
  */
 var WS_NL_URL = null;
+
+/**
+ * @type {String}
+ * 
+ * @properties={typeid:35,uuid:"0CD6CA06-DCE0-492D-8C5A-BFB3E6EF1977"}
+ */
+var WS_TRACK_EXT_URL = null;
 
 /**
  * @properties={typeid:24,uuid:"8626FE2F-44B0-4590-9C54-AC8201A9CBC3"}
@@ -1266,11 +1281,13 @@ function getWebServiceResponseWS(url, params, dbName)
 		switch (response.getStatusCode())
 		{
 			case globals.HTTPStatusCode.OK:
-				break;
+//				application.output('OK',LOGGINGLEVEL.ERROR);
+			    break;
 				
 			// Conflict
 			case globals.HTTPStatusCode.CONFLICT:
 				var message = responseObj.message;
+				application.output('CONFLICT : ' + message,LOGGINGLEVEL.ERROR);
 				globals.ma_utl_showErrorDialog(globals.convertString(message), 'i18n:svy.fr.lbl.excuse_me');				
 				break;
 	
@@ -1286,23 +1303,25 @@ function getWebServiceResponseWS(url, params, dbName)
 				break;
 	
 			case globals.HTTPStatusCode.NOT_IMPLEMENTED:
+			    application.output('NOT IMPLEMENTED',LOGGINGLEVEL.ERROR);
 				globals.ma_utl_showErrorDialog('Il servizio richiesto non è disponibile, contattare l\'assistenza', 'Errore del server');
 				break;
 				
 			case globals.HTTPStatusCode.UNAUTHORIZED:
 			case globals.HTTPStatusCode.FORBIDDEN:
+			    application.output('UNAUTHORIZED',LOGGINGLEVEL.ERROR);
 				globals.ma_utl_showErrorDialog('L\'utente non dispone delle autorizzazioni necessarie');
 				break;
 				
 			case globals.HTTPStatusCode.REQUEST_TIMEOUT:
 //				if(globals.loginToWebService(security.getUserName(), security.getClientID()))
 //					return getWebServiceResponse(url, params);
-				
+				application.output('TIMEOUT',LOGGINGLEVEL.ERROR);
 				globals.ma_utl_showErrorDialog('Timeout : il server ha impiegato troppo tempo a rispondere');
 				break;
 			
 			default:
-				application.output(responseObj.message, LOGGINGLEVEL.ERROR);
+				 application.output('at ' + url + 'with params : ' + params.toString() + ' says DEFAULT : ' + responseObj.message, LOGGINGLEVEL.ERROR);
 			     globals.ma_utl_showErrorDialog
 					(
 				    	  'Il server non è riuscito a prendere in carico la richiesta.\nSe il problema persiste, contattare lo studio'
@@ -1582,7 +1601,7 @@ function getLavoratoriDalAl(dal,al)
  * @param {Date} [dal]
  * @param {Date} [al]
  *
- * @return Array<Number>
+ * @return {Array<Number>}
  * 
  * @properties={typeid:24,uuid:"84B2AE4E-3F95-4C45-B1E3-2C895E69D4B3"}
  * @AllowToRunInFind
@@ -2993,7 +3012,8 @@ function getServerTimbrature()
 	{
 		//produzione esterno
 	case 'http://webapp.studiomiazzo.it:8080':
-	case 'https://webapp.studiomiazzo.it':	
+	case 'https://webapp.studiomiazzo.it':
+	case 'https://webapp.peoplegest.it':
 	path = "srv-epiweb";	
 	break;
 		
@@ -3849,6 +3869,21 @@ function getUltimoPeriodoPredisposto(idLavoratore)
 }
 
 /**
+ * @return {JSFoundSet<db:/ma_presenze/e2sediinstallazione>}
+ * 
+ * @properties={typeid:24,uuid:"29F84285-96BE-469D-993E-E4EC6B0BBBC7"}
+ * @AllowToRunInFind
+ */
+function getGruppiInstallazione()
+{
+	/** @type {JSFoundSet<db:/ma_presenze/e2sediinstallazione>}*/
+	var fs = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.SEDI_INSTALLAZIONE);
+	if(fs.find())
+		fs.search();
+	return fs;	
+}
+
+/**
  * Restituisce il gruppo di installazione relativo all' id della ditta indicata
  * 
  * @param {Number} idDitta
@@ -4425,6 +4460,36 @@ function getIdLavoratoreFromUserId(userid,owner)
 }
 
 /**
+ * Restituisce la data di cessazione del lavoratore interrogando il web service.
+ * Necessariamente aggiunta per verificare se un lavoratore è in forza o cessato durante la gestione di 
+ * una richiesta di ferie permessi (può risultare che alcuni lavoratori non siano visibili
+ * all'utente correntemente loggato a causa della restrizione imposta in fase di login)
+ * 
+ * @param {Number} userid
+ * @param {String} ownerid
+ *
+ * @properties={typeid:24,uuid:"DB9EAD58-D9B3-490B-A592-0FCD20ECB2E4"}
+ */
+function isUtenteCessato(userid,ownerid)
+{
+	var idLav = globals.getIdLavoratoreFromUserId(userid,ownerid);
+	if(idLav == null)
+		return false;
+	
+	var url = globals.WS_RFP_URL + '/Lavoratori/IsCessato';
+	var params = {
+					idlavoratori : [idLav],
+					databasecliente : _to_sec_organization$lgn.sec_organization_to_sec_owner.database_name
+				 };
+	
+	var _responseObj = globals.getWebServiceResponse(url, params);
+	if(_responseObj)
+		return _responseObj['ReturnValue'];
+	
+	return false;
+}
+
+/**
  * @AllowToRunInFind
  * 
  * Restituisce la data di assunzione del lavoratore
@@ -4452,7 +4517,9 @@ function getDataAssunzione(idLavoratore)
  * Restituisce la data di cessazione del lavoratore
  * 
  * @param {Number} idLavoratore
- *
+ * 
+ * @return {Date}
+ * 
  * @properties={typeid:24,uuid:"A17F42F6-DEDC-4E8A-A13C-B089DA108774"}
  */
 function getDataCessazione(idLavoratore)
@@ -4466,6 +4533,29 @@ function getDataCessazione(idLavoratore)
     	return fs.cessazione;
     }
     return null;
+}
+
+/**
+ * Restituisce la data di cessazione del lavoratore interrogando il web service.
+ * Necessariamente aggiunta per verificare se un lavoratore è in forza o cessato durante la gestione di 
+ * una richiesta di ferie permessi (può risultare che alcuni lavoratori non siano visibili
+ * all'utente correntemente loggato a causa della restrizione imposta in fase di login)  
+ * 
+ * @param {Number} idLavoratore
+ * @param {String} dbCliente
+ *
+ * @properties={typeid:24,uuid:"498F0607-E18D-4641-8114-312C88D67791"}
+ */
+function getDataCessazioneWS(idLavoratore,dbCliente)
+{
+	var url = globals.WS_URL + '/Lavoratori/DataCessazione';
+	var params = {
+					idlavoratori : [idLavoratore],
+					databasecliente : dbCliente
+				 };
+	
+	var _responseObj = globals.getWebServiceResponse(url, params);
+	return _responseObj['cessazione'];
 }
 
 /**
