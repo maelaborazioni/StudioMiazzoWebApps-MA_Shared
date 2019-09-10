@@ -224,6 +224,8 @@ var Key =
 	GESTIONE_SQUADRATURE     : 'Gestione squadrature',
 	DEMO                     : 'DEMO',
 	PROG_TURNI               : 'Programmazione turni',
+	BLOCCA_INVIO_GIORNALIERA : 'Blocca invio giornaliera',
+	BLOCCA_IMPORTAZIONE_TIMBR: 'Blocca importazione timbrature',
 	// gestione chiavi RFP
 	RICHIESTA_PERMESSI       : 'RFP',
 	RICHIESTA_PERMESSI_CR    : 'RFP Capo Reparto',
@@ -243,6 +245,7 @@ var Key =
 	// gestione chiavi PV
 	PANNELLO_VARIAZIONI      : 'Pannello variazioni', 
 	PANNELLO_VARIAZIONI_UTENTE: 'Pannello variazioni utente',
+	PANNELLO_VARIAZIONI_FILTRO_UTENTE : 'Pannello variazioni filtro utente',
 	// gestione chiavi UTL
 	LOOKUP                   : 'Lookup',
 	REQUIRED_FIELDS          : 'Required fields',
@@ -278,7 +281,9 @@ var Key =
 	RETE_IMPRESA_GESTORE     : 'Rete impresa gestore',
 	// gestione chiavi schedulatore
 	SCHEDULATORE             : 'Schedulatore',
-	SCHEDULATORE_GESTIONE    : 'Schedulatore gestione'
+	SCHEDULATORE_GESTIONE    : 'Schedulatore gestione',
+	// gestione importazione dati
+	FTP_NO_CONTROLLO         : 'FTP Disabilita controllo'
 }
 
 /**
@@ -949,10 +954,48 @@ function getOperation(opId)
 
 /**
  * @properties={typeid:24,uuid:"06E9BE53-1EA9-4C95-B9BF-6205B29E599E"}
+ * @AllowToRunInFind
  */
-function isEsterna()
+function isEsterna(idDitta)
 {
-	return globals._tipologiaDitta === globals.Tipologia.STANDARD;
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
+	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.DITTE);
+	if (fs && fs.find())
+	{
+		fs.idditta = idDitta;
+		if(fs.search())
+		{
+			return fs.tipologia === globals.Tipologia.ESTERNA;
+		}
+	}
+	
+	return false;
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * TODO generated, please specify type and doc for the params
+ * @param idDitta
+ *
+ * @properties={typeid:24,uuid:"7A6180C2-3458-49C7-8F9B-FDF8D39EF7FF"}
+ */
+function isInterinale(idDitta)
+{
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
+	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.DITTE);
+	if (fs && fs.find())
+	{
+		fs.idditta = idDitta;
+		if(fs.search())
+		{
+			return fs.tipologia === globals.Tipologia.ESTERNA
+			       && fs.ditte_to_ditte_legami 
+				   && fs.ditte_to_ditte_legami.tipoesterni == 0;
+		}
+	}
+	
+	return false;
 }
 
 /**
@@ -1536,12 +1579,13 @@ function getCodiceDittaPrincipaleGruppoInstallazione(idGruppoInst)
  * 
  * @param params
  * @param idditta
+ * @param [sortByNominativo]
  * 
  * @return {Array<Number>} l'elenco di ID dei dipendenti compresi nel gruppo lavoratori
  *
  * @properties={typeid:24,uuid:"3A1D952B-EC18-44F1-90A4-A504FDAFABC5"}
  */
-function getLavoratoriGruppo(params,idditta)
+function getLavoratoriGruppo(params,idditta,sortByNominativo)
 {
 	/** @type {{ returnValue: Boolean, ftrString: String }} */
 	var response = globals.getFiltroDipInEntrataGiornaliera(params);
@@ -1553,6 +1597,10 @@ function getLavoratoriGruppo(params,idditta)
 		{
 			//il filtro da applicare tramite query è la stringa ritornata in precedenza
 			var sqlString = "SELECT idLavoratore FROM V_Lavoratori L WHERE idditta = " + idditta + ' AND ' + ftrString;
+			
+			if(sortByNominativo)
+			   sqlString +=	" ORDER BY L.nominativo asc";
+			
 			var ftrDataset = databaseManager.getDataSetByQuery(globals.Server.MA_ANAGRAFICHE, sqlString, null, -1);
 			var idDipendenti = ftrDataset.getColumnAsArray(1);
 			
@@ -1812,7 +1860,6 @@ function ma_utl_ditta_toSede(idditta)
 }
 
 /**
- * TODO generated, please specify type and doc for the params
  * @param idditta
  *
  * @properties={typeid:24,uuid:"7BBA530A-A222-4D83-83B8-C873F76EE67B"}
@@ -2556,6 +2603,52 @@ function getUserName(userId)
 }
 
 /**
+ * @AllowToRunInFind
+ * 
+ * Restituisce l'owner dell'utente avente come identificativo user_id
+ * 
+ * @param userId
+ *
+ * @properties={typeid:24,uuid:"9F86F408-453E-45FB-9D55-7ED1B19829F5"}
+ */
+function getUserOwner(userId)
+{
+	/** @type {JSFoundSet<db:/svy_framework/sec_user>} */
+	var fsUser = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user');
+	if(fsUser.find())
+	{
+		fsUser.user_id = userId;
+		if(fsUser.search())
+			return fsUser.owner_id;
+	}
+	
+	return null;
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * Restituisce il catalog associato all'owner avente come identificativo ownerID
+ * 
+ * @param ownerID
+ *
+ * @properties={typeid:24,uuid:"AC5D9E14-8362-4D83-8704-89589C215511"}
+ */
+function getCatalogFromOwner(ownerID)
+{
+	/** @type {JSFoundSet<db:/svy_framework/sec_owner>} */
+	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_owner');
+	if(fs.find())
+	{
+		fs.owner_id = ownerID;
+		if(fs.search())
+			return fs.database_name;
+	}
+	
+	return null;
+}
+
+/**
  * Restituisce il record user_id dell'utente Servoy associato all'idlavoratore del lavoratore di Epi2
  * (sec_user_to_lavoratori_to_sec_user)
  * 
@@ -2927,6 +3020,29 @@ function isFemmina(idLavoratore)
 			return parseInt(fs.codicefiscale.substr(9,2),10) > 40 ? true : false;
 	}
 	return null;
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * Determina se per il tipo di contratto a cui è associato il lavoratore 
+ * è possibile inserire eventi in giornaliera (anche eventi lunghi) e/o per verificare il piano ferie
+ * 
+ * @param {Number} idLavoratore
+ *
+ * @properties={typeid:24,uuid:"89BE4019-D358-4D1F-9374-DA2A1A6ACA6B"}
+ */
+function isCollaboratore(idLavoratore)
+{
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
+	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
+	if(fs.find())
+	{
+		fs.idlavoratore = idLavoratore;
+		if(fs.search())
+			return (fs.codcontratto == GruppoContrattuale.COLLABORATORI);
+	}
+	return false;
 }
 
 /**
@@ -3904,18 +4020,27 @@ function getGruppoInstallazioneDitta(idDitta)
 		fs.idditta = idDitta;
 		if(fs.search())
 		{
-			if(fs.tipologia == 1)
-				idGruppoInstallazione = fs['ditte_to_ditte_legami']['ditte_legami_to_ditte_sedi']['ditte_sedi_to_ditte_sedigruppiinst'].idgruppoinst;
+			if(isInterinale(idDitta))
+			{	 
+				if(fs['ditte_to_ditte_legami']['ditte_legami_to_ditte_sedi']['ditte_sedi_to_ditte_sedigruppiinst'])
+					idGruppoInstallazione = fs['ditte_to_ditte_legami']['ditte_legami_to_ditte_sedi']['ditte_sedi_to_ditte_sedigruppiinst'].idgruppoinst;
+			}
 			else if(fs['ditte_to_ditte_sedi_sedeoperativa']['ditte_sedi_to_ditte_sedigruppiinst'])				
                 idGruppoInstallazione = fs['ditte_to_ditte_sedi_sedeoperativa']['ditte_sedi_to_ditte_sedigruppiinst'].idgruppoinst;
 			
 			if(!idGruppoInstallazione)
-			    globals.ma_utl_showWarningDialog('Nessun gruppo di installazione trovato per la ditta : ' + globals.getCodDitta(idDitta) + ' - ' + globals.getRagioneSociale(idDitta));
-			
-		}
-		else                          
-              globals.ma_utl_showWarningDialog('nessuna ditta trovata con id : ' + idDitta);
-	
+			{
+				var fsGrInst = getGruppiInstallazione();
+				if(fsGrInst && fsGrInst.getSize())
+				{
+					var rec = fsGrInst.getRecord(1);
+					idGruppoInstallazione = rec.idgruppoinst;				
+				}
+			}				
+		}		
+//		if(!idGruppoInstallazione)                          
+//			globals.ma_utl_showWarningDialog('Nessun gruppo di installazione trovato per la ditta : ' + globals.getCodDitta(idDitta) + ' - ' + globals.getRagioneSociale(idDitta));
+		
 		return idGruppoInstallazione;
 	}
 	else
@@ -3934,17 +4059,12 @@ function getGruppoInstallazioneDitta(idDitta)
  */
 function getGruppoInstallazioneLavoratore(idLavoratore)
 {
-	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
-	var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
-	if(fs.find())
-	{
-		fs.idlavoratore = idLavoratore;
-		if(fs.search())
-			return fs.lavoratori_to_ditte.tipologia == globals.Tipologia.ESTERNA ?
-					                                   fs.lavoratori_to_ditte['ditte_to_ditte_legami']['ditte_legami_to_ditte_sedi'].ditte_sedi_to_ditte_sedigruppiinst.idgruppoinst :
-                                                       fs.lavoratori_to_ditte['ditte_to_ditte_sedi_sedeoperativa']['ditte_sedi_to_ditte_sedigruppiinst'].idgruppoinst;
-	}
-	return null;
+	var idDitta = globals.getDitta(idLavoratore);
+	
+	if(isInterinale(idDitta))
+		idDitta = globals.getDittaRiferimento(idDitta);
+	
+	return globals.getGruppoInstallazioneDitta(idDitta);
 }
 
 /**
@@ -4667,6 +4787,9 @@ function pulisciGiornaliera(iddip,dal,al)
 	dal = new Date(dal.getFullYear(),dal.getMonth(),dal.getDate() + 1);
 	
 	var recsGiorn = globals.getRecsGiornaliera(iddip,dal,al);
+	if(!recsGiorn)
+		return false;
+	
 	var arrIdGiornaliera = globals.foundsetToArray(recsGiorn,'idgiornaliera');
 	
 	var sqlPulisciGiorn = "DELETE FROM E2GiornalieraEventi WHERE idgiornaliera IN ("  +
