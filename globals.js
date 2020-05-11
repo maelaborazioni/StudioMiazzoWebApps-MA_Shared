@@ -791,115 +791,91 @@ var vEmployeeCurrentEmployerID = 0;
 
 /**
  * @type {String}
+ * 
+ * @properties={typeid:35,uuid:"54B68F1B-17BA-423E-95D6-2FCC984D9F43"}
+ */
+var WS_OPERATION = null;
+
+/**
+ * @type {String}
+ * 
  *
- * @properties={typeid:35,uuid:"00534ABE-BE9F-4692-8E02-CABAE6EBFB75"}
+ * @properties={typeid:35,uuid:"588BDD30-22B8-43C3-9E56-2E7737E2EEB2"}
  */
-var WS_URL = null;
+var WS_CALENDAR = null;
 
 /**
  * @type {String}
  * 
- * @properties={typeid:35,uuid:"CEC69D71-A27D-4AC8-87D3-1CA01266AE71"}
+ *
+ * @properties={typeid:35,uuid:"CECBCFF6-4F71-461E-ACD7-9B03C5FA8C37"}
  */
-var WS_MULTI_URL = null;
+var WS_CERTIFICATE = null;
 
 /**
  * @type {String}
  * 
- * @properties={typeid:35,uuid:"BDCD4900-444E-4305-86AA-A9F5DFCBBBEE"}
+ *
+ * @properties={typeid:35,uuid:"45A8C893-C3E6-4D99-A627-3C6208BEF85D"}
  */
-var WS_PSL_URL = null;
+
+var WS_EVENT = null;
+/**
+ * @type {String}
+ * 
+ *
+ * @properties={typeid:35,uuid:"56C2E208-6B6B-4097-9A5B-EFBDA248928A"}
+ */
+var WS_LU = null;
+/**
+ * @type {String}
+ * 
+ *
+ * @properties={typeid:35,uuid:"96326950-0C79-4C14-8913-0AC5B79299A9"}
+ */
+var WS_NL = null;
+/**
+ * @type {String}
+ * 
+ *
+ * @properties={typeid:35,uuid:"F2436007-89E6-4EA0-B712-8CE4AB9F16AD"}
+ */
+var WS_PRESENCE = null;
 
 /**
  * @type {String}
  * 
- * @properties={typeid:35,uuid:"8C2189AE-8BEA-494F-BD0C-04E069718D89"}
+ *
+ * @properties={typeid:35,uuid:"878F4210-6373-4731-A5E0-09391CAA95DE"}
  */
-var WS_REPORT_URL = null;
-
+var WS_PV = null;
 /**
  * @type {String}
  * 
- * @properties={typeid:35,uuid:"1D7D6EEC-7843-4174-8162-A4833C5A1666"}
+ *
+ * @properties={typeid:35,uuid:"B5938626-D293-42E4-9BC2-C683B39B8710"}
  */
-var WS_REPORT_GIORNALIERA_URL = null;	
-
+var WS_REPORT = null;
 /**
  * @type {String}
  * 
- * @properties={typeid:35,uuid:"E350187E-92F3-4CBA-8E24-EAF8477E6E27"}
+ *
+ * @properties={typeid:35,uuid:"9B6D796A-8EBD-4810-8867-7CD91803B80E"}
  */
-var WS_LU_URL = null;
-
+var WS_STAMPING = null;
 /**
  * @type {String}
  * 
- * @properties={typeid:35,uuid:"18675A41-4506-4B25-82F9-DAF8C216E8F1"}
+ *
+ * @properties={typeid:35,uuid:"09F64495-5D34-4C57-B8C0-16F1FEDF118A"}
  */
-var WS_PV_URL = null;
-
+var WS_REGISTRY = null;
 /**
  * @type {String}
- * 
- * @properties={typeid:35,uuid:"386DB394-0F55-423E-A1FC-47471150B41C"}
+ *
+ * @properties={typeid:35,uuid:"8A7518D4-18E2-48D4-AD3B-4A75262B420A"}
  */
-var WS_RFP_URL = null;
-
-/**
- * @type {String}
- * 
- * @properties={typeid:35,uuid:"BC2A3A40-30AE-45C1-95B2-60D9BC60A9E0"}
- */
-var WS_ADMIN_URL = null;
-
-/**
- * @type {String}
- * 
- * @properties={typeid:35,uuid:"84AB4BE3-0D03-43A4-BDBA-5D8FC8C5A4FF"}
- */
-var WS_TIMBR_URL = null;
-
-/**
- * @type {String}
- * 
- * @properties={typeid:35,uuid:"60240D49-6AEA-4074-92F4-95B9C86BF0AB"}
- */
-var WS_EVENTI_URL = null;
-
-/**
- * @type {String}
- * 
- * @properties={typeid:35,uuid:"6503AAD7-5556-4EDB-8C90-7AEC457609D0"}
- */
-var WS_GIORN_URL = null;
-
-/**
- * @type {String}
- * 
- * @properties={typeid:35,uuid:"23B26E60-C576-4046-BA4C-0489800E0AE4"}
- */
-var WS_STORICO_URL = null;
-
-/**
- * @type {String}
- * 
- * @properties={typeid:35,uuid:"1CF59426-D9AF-4FE4-8631-733FD6EE5B2D"}
- */
-var WS_OP_URL = null;
-
-/**
- * @type {String}
- * 
- * @properties={typeid:35,uuid:"D9C8D685-CA61-47DA-96A2-4827F6A3F115"}
- */
-var WS_NL_URL = null;
-
-/**
- * @type {String}
- * 
- * @properties={typeid:35,uuid:"0CD6CA06-DCE0-492D-8C5A-BFB3E6EF1977"}
- */
-var WS_TRACK_EXT_URL = null;
+var WS_JOB_SCHEDULER = null;
 
 /**
  * @properties={typeid:24,uuid:"8626FE2F-44B0-4590-9C54-AC8201A9CBC3"}
@@ -1154,12 +1130,13 @@ function getSwitchedServer(server)
  * @param {String} url
  * @param		   params
  * 
- * @properties={typeid:24,uuid:"AE26BB5C-5EF5-4F37-8572-62E3814BEA86"}
+ * @properties={typeid:24,uuid:"056CA790-EF8B-4139-857D-F3986B134180"}
  * @AllowToRunInFind
  */
-function getWebServiceResponse(url, params)
+function getWebServiceResponseBase(url, params)
 {
 	var client = globals.getHttpClient();
+	var request = client.createPostRequest(url);
 	
 	/**
 	 * Aggiungiamo il parametro per la connessione al database cliente
@@ -1170,17 +1147,25 @@ function getWebServiceResponse(url, params)
 	params.tipoconnessione = params.tipoconnessione != null ? params.tipoconnessione : globals.getTipoConnessione();
 	params.idgruppoinstallazione = params.idgruppoinstallazione //|| globals.getGruppoInstallazioneDitta(params.idditta);
 	
-	if(params.user_id == null)
-	   params.user_id = security.getUserName();
-	if(params.client_id == null)
-	   params.client_id = security.getClientID();
+	if(params.userid == null)
+	   params.userid = security.getUserName();
+	if(params.clientid == null)
+	   params.clientid = security.getClientID();
 	
 	/**
 	 * Remove all leading underscores, if any
 	 */
 	var jsonParams = plugins.serialize.toJSON(params).replace(/_([a-zA-Z0-9]+)(\\?":)/g, '$1$2');
-				
-	var request = client.createPostRequest(url);
+	
+	// authorizing region
+	request.usePreemptiveAuthentication(true);
+	// verify expiration and, in case, refresh the owned token
+	var expAt = new Date(scopes.auth._expirationDate);
+	if(globals.dateDiff(new Date(),expAt,1000 * 60 * 60) < 5)
+	   scopes.auth.RefreshPSToken(scopes.auth._refreshToken);	
+	request.addHeader('Authorization','Bearer ' + scopes.auth._accessToken);
+			
+	
 	switch(WS_DOTNET_CASE)
 	{
 		case WS_DOTNET.CORE:
@@ -1198,8 +1183,10 @@ function getWebServiceResponse(url, params)
 		var msg = '';
 		// We always expect a Json result
 		var responseBody = response.getResponseBody();
+		/**@type {{ReturnValue: Object, StatusCode: Number, Message: String}}*/
 		var responseObj  = plugins.serialize.fromJSON(responseBody);
 		var statusCode   = response.getStatusCode();
+		responseObj.StatusCode = statusCode;
 		
 		switch (statusCode)
 		{
@@ -1208,15 +1195,15 @@ function getWebServiceResponse(url, params)
 				
 			// Conflict
 			case globals.HTTPStatusCode.CONFLICT:
-				var message = responseObj.message || 'È in corso un\'altra operazione sui dipendenti selezionati';
+				var message = responseObj.Message || 'È in corso un\'altra operazione sui dipendenti selezionati';
 			
-				if(responseObj.blocked)
+				if(responseObj.Blocked)
 				{
 					/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 					var employeesFoundset = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.LAVORATORI);
 					if (employeesFoundset && employeesFoundset.find())
 					{
-						employeesFoundset.idlavoratore = responseObj['blocked'];
+						employeesFoundset.idlavoratore = responseObj['Blocked'];
 						if(employeesFoundset.search() > 0)
 						{
 							message += '<p>';
@@ -1244,10 +1231,10 @@ function getWebServiceResponse(url, params)
 				msg = 'Il servizio richiesto non è disponibile, contattare l\'assistenza';
 				break;
 				
-//			case globals.HTTPStatusCode.UNAUTHORIZED:
-//				if(globals.loginToWebService(security.getUserName(), security.getClientID()))
-//					return getWebServiceResponse(url, params);
-//				break;
+			case globals.HTTPStatusCode.UNAUTHORIZED:
+				msg = 'L\'utente non dispone delle autorizzazioni necessarie';
+				break;
+				
 			case globals.HTTPStatusCode.FORBIDDEN:
 				msg = 'L\'utente non dispone delle autorizzazioni necessarie';
 				break;
@@ -1276,16 +1263,175 @@ function getWebServiceResponse(url, params)
 	else
 	{
 		globals.ma_utl_showErrorDialog('<html>Il server non risponde alla richiesta.<br/>Controllare l\'accesso ad internet, effettuare nuovamente il login e, se il problema persiste, contattare il servizio di assistenza.</html>', 'i18n:svy.fr.lbl.excuse_me');
-	    return { returnValue: false, message: 'Il server non risponde, riprovare' };
+	    return { StatusCode : globals.HTTPStatusCode.INTERNAL_ERROR, ReturnValue : null, Message: 'Il server non risponde, riprovare' };
 	}
 }
+/**
+ * @param {String} url
+ * @param		   params
+ * 
+ * @return {{ReturnValue: Object, StatusCode: Number, Message: String}}
+ * 
+ * @properties={typeid:24,uuid:"AE26BB5C-5EF5-4F37-8572-62E3814BEA86"}
+ * @AllowToRunInFind
+ */
+function getWebServiceResponse(url, params)
+{
+	return getWebServiceResponseBase(url,params);
+}
 
+/**
+ * @param {String} url
+ * @param		   params
+ * 
+ * @return {{statusCode : Number, returnValue: Object, message : String, operationId : String, operationHash : String, status : Number, start : Date, end : Date, progress : Number, lastProgress : Date}}
+ * 
+ * @properties={typeid:24,uuid:"47C746B9-3B92-4211-9682-27031625BFEC"}
+ * @AllowToRunInFind
+ */
+function getWebServiceOperationResponse(url, params)
+{
+	/** @type {{statusCode : Number, returnValue: Object, message : String, operationId : String, operationHash : String, status : Number, start : Date, end : Date, progress : Number, lastProgress : Date}} */
+	var operationResponse = getWebServiceResponseBase(url,params);
+	return operationResponse;
+	
+//	var client = globals.getHttpClient();
+//	var request = client.createPostRequest(url);
+//	
+//	/**
+//	 * Aggiungiamo il parametro per la connessione al database cliente
+//	 */
+//	if(globals.isCliente())
+//		params.databasecliente = globals.customer_db_name;
+//	
+//	params.tipoconnessione = params.tipoconnessione != null ? params.tipoconnessione : globals.getTipoConnessione();
+//	params.idgruppoinstallazione = params.idgruppoinstallazione //|| globals.getGruppoInstallazioneDitta(params.idditta);
+//	
+//	if(params.userid == null)
+//	   params.userid = security.getUserName();
+//	if(params.clientid == null)
+//	   params.clientid = security.getClientID();
+//	
+//	/**
+//	 * Remove all leading underscores, if any
+//	 */
+//	var jsonParams = plugins.serialize.toJSON(params).replace(/_([a-zA-Z0-9]+)(\\?":)/g, '$1$2');
+//	
+//	// authorizing region
+//	request.usePreemptiveAuthentication(true);
+//	// verify expiration and, in case, refresh the owned token
+//	var expAt = new Date(scopes.auth._expirationDate);
+//	if(globals.dateDiff(new Date(),expAt,1000 * 60 * 60) < 5)
+//	   scopes.auth.RefreshPSToken(scopes.auth._refreshToken);	
+//	request.addHeader('Authorization','Bearer ' + scopes.auth._accessToken);
+//			
+//	
+//	switch(WS_DOTNET_CASE)
+//	{
+//		case WS_DOTNET.CORE:
+//		request.addHeader('Content-type','application/json');	
+//		break;
+//		default: 
+//		request.addHeader('Content-type','text/json');
+//		break;
+//	}	
+//	request.setBodyContent(jsonParams);
+//	
+//	var response = request.executeRequest();
+//	if (response)
+//	{
+//		var msg = '';
+//		// We always expect a Json result
+//		var responseBody = response.getResponseBody();
+//		/**@type {{statusCode : Number, returnValue: Object, message : String, operationId : String, operationHash : String, status : Number, start : Date, end : Date, progress : Number, lastProgress : Date}} */
+//		var responseObj  = plugins.serialize.fromJSON(responseBody);
+//		var statusCode   = response.getStatusCode();
+//		responseObj.StatusCode = statusCode;
+//		
+//		switch (statusCode)
+//		{
+//			case globals.HTTPStatusCode.OK:
+//				break;
+//				
+//			// Conflict
+//			case globals.HTTPStatusCode.CONFLICT:
+//				var message = responseObj.Message || 'È in corso un\'altra operazione sui dipendenti selezionati';
+//			
+//				if(responseObj.Blocked)
+//				{
+//					/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
+//					var employeesFoundset = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.LAVORATORI);
+//					if (employeesFoundset && employeesFoundset.find())
+//					{
+//						employeesFoundset.idlavoratore = responseObj['Blocked'];
+//						if(employeesFoundset.search() > 0)
+//						{
+//							message += '<p>';
+//							for(var emp = 1; emp <= employeesFoundset.getSize(); emp++)
+//								message += employeesFoundset.getRecord(emp)['nominativo'] + '\n';
+//
+//							message += '</p>';
+//						}
+//					}
+//				}
+//				
+//				msg = globals.convertString(message);
+//				globals.ma_utl_showErrorDialog(msg, 'i18n:svy.fr.lbl.excuse_me');				
+//				break;
+//	
+//			case globals.HTTPStatusCode.INTERNAL_ERROR:
+//				if(responseObj.message)
+//					msg = responseObj.message;
+//				else
+//					msg = url + ' : Errore di elaborazione, rieffettuare l\'operazione o contattare l\'assistenza.'
+//				
+//				break;
+//	
+//			case globals.HTTPStatusCode.NOT_IMPLEMENTED:
+//				msg = 'Il servizio richiesto non è disponibile, contattare l\'assistenza';
+//				break;
+//				
+//			case globals.HTTPStatusCode.UNAUTHORIZED:
+//				msg = 'L\'utente non dispone delle autorizzazioni necessarie';
+//				break;
+//				
+//			case globals.HTTPStatusCode.FORBIDDEN:
+//				msg = 'L\'utente non dispone delle autorizzazioni necessarie';
+//				break;
+//
+//			case globals.HTTPStatusCode.REQUEST_TIMEOUT:
+//				msg = 'Errore di timeout durante l\'accesso alla risorsa' + url;
+//				break;
+//				
+//			case globals.HTTPStatusCode.NOT_FOUND:
+//				msg = 'La risorsa richiesta non esiste: ' + url;
+//				break;
+//			
+//			default:
+//				msg = 'Errore sconosciuto, codice di risposta: ' + statusCode + '.\nContattare il servizio di assistenza.';
+//				break;			
+//		}
+//		
+//		if(msg != '')
+//		{
+//			globals.ma_utl_logError(new Error(msg));		
+//			globals.ma_utl_showErrorDialog(msg, 'i18n:svy.fr.lbl.excuse_me');
+//		}
+//		
+//		return responseObj;
+//	}
+//	else
+//	{
+//		globals.ma_utl_showErrorDialog('<html>Il server non risponde alla richiesta.<br/>Controllare l\'accesso ad internet, effettuare nuovamente il login e, se il problema persiste, contattare il servizio di assistenza.</html>', 'i18n:svy.fr.lbl.excuse_me');
+//	    return { statusCode : globals.HTTPStatusCode.INTERNAL_ERROR, returnValue : null, message: 'Il server non risponde, riprovare', operationId: '', operationHash: '', status:-1 ,start : null, end: null, progress : null,lastProgress : null };
+//	}
+}
 /**
  * @param {String} url
  * @param {Object} params
  * @param {String} dbName
  * 
- * @return {Object}
+ * @return {{ReturnValue: Object, StatusCode: Number, Message: String}}
  * 
  * @properties={typeid:24,uuid:"A408074F-45FB-42F1-B242-03B8E2DA1AC8"}
  * @AllowToRunInFind
@@ -1293,12 +1439,13 @@ function getWebServiceResponse(url, params)
 function getWebServiceResponseWS(url, params, dbName)
 {
 	var client = globals.getHttpClient();
+	var request = client.createPostRequest(url);
+	request.addHeader('Content-type','application/json');
 	
 	/**
 	 * Aggiungiamo il parametro per la connessione al database cliente
 	 */
-	params.databasecliente = dbName;
-	
+	params.databasecliente = dbName;	
 	params.tipoconnessione = Connessione.CLIENTE;//params.tipoconnessione != null ? params.tipoconnessione : globals.getTipoConnessione();
 	
 	/**
@@ -1306,11 +1453,14 @@ function getWebServiceResponseWS(url, params, dbName)
 	 */
 	var jsonParams = plugins.serialize.toJSON(params).replace(/_([a-zA-Z0-9]+)(\\?":)/g, '$1$2');
 	    
-//	application.output('jsonParams are - ' + jsonParams,LOGGINGLEVEL.ERROR);		
-			
-	var request = client.createPostRequest(url);
-
-	request.addHeader('Content-type','application/json');	
+	// authorizing region
+	request.usePreemptiveAuthentication(true);
+	// verify expiration and, in case, refresh the owned token
+	var expAt = new Date(scopes.auth._expirationDate);
+	if(globals.dateDiff(new Date(),expAt,1000 * 60 * 60) < 5)
+	   scopes.auth.RefreshPSToken(scopes.auth._refreshToken);	
+	request.addHeader('Authorization','Bearer ' + scopes.auth._accessToken);
+	
 	request.setBodyContent(jsonParams);
 	
 	var response = request.executeRequest();	
@@ -1318,14 +1468,14 @@ function getWebServiceResponseWS(url, params, dbName)
 	{
 		// We always expect a Json result
 		var responseBody = response.getResponseBody();
-		/** @type {{ message: String }} */
+		/** @type {{ReturnValue: Object, StatusCode: Number, Message: String}} */
 		var responseObj = plugins.serialize.fromJSON(responseBody);
-		
+		responseObj.StatusCode = response.getStatusCode();
 		switch (response.getStatusCode())
 		{
 			case globals.HTTPStatusCode.OK:
-//				application.output('OK',LOGGINGLEVEL.ERROR);
-			    break;
+				responseObj.ReturnValue = response['ReturnValue'];
+				break;
 				
 			// Conflict
 			case globals.HTTPStatusCode.CONFLICT:
@@ -1357,8 +1507,6 @@ function getWebServiceResponseWS(url, params, dbName)
 				break;
 				
 			case globals.HTTPStatusCode.REQUEST_TIMEOUT:
-//				if(globals.loginToWebService(security.getUserName(), security.getClientID()))
-//					return getWebServiceResponse(url, params);
 				application.output('TIMEOUT',LOGGINGLEVEL.ERROR);
 				globals.ma_utl_showErrorDialog('Timeout : il server ha impiegato troppo tempo a rispondere');
 				break;
@@ -1377,60 +1525,6 @@ function getWebServiceResponseWS(url, params, dbName)
 	    globals.ma_utl_showErrorDialog('Il server non risponde, riprovare ', 'Errore del server');
 	
 	return responseObj;
-}
-
-/**
- * @param {String} username
- * @param {String} clientID
- * 
- * @properties={typeid:24,uuid:"6DE7AB80-6093-40A6-8A25-E3DE4F8ADF1B"}
- */
-function loginToWebService(username, clientID)
-{	
-	var loginUrl = globals.WS_URL + '/Users/Set';
-	var loginRequest = globals.getHttpClient().createPostRequest(loginUrl);
-		loginRequest.addParameter('user_id', username);
-		loginRequest.addParameter('client_id', clientID);
-			
-	var response = loginRequest.executeRequest();
-	if (response && response.getStatusCode() === globals.HTTPStatusCode.OK)
-	{
-		application.output(response.getResponseBody(), LOGGINGLEVEL.INFO);
-		return true;
-	}
-	else
-	if (response)
-		application.output(response.getStatusCode() + ': ' + response.getResponseBody(), LOGGINGLEVEL.FATAL);
-	
-	return false;
-}
-
-/**
- * Effettua il login al web service per il servizio RESTful web service
- * @param username
- * @param clientID
- * @param wsUrl
- *
- * @properties={typeid:24,uuid:"080E87D8-A7E6-4223-A690-BFCE3035CF61"}
- */
-function loginToWebServiceREST(username, clientID, wsUrl)
-{
-	var loginUrl = wsUrl + '/Users/Set';
-	var loginRequest = globals.getHttpClient().createPostRequest(loginUrl);
-		loginRequest.addParameter('user_id', username);
-		loginRequest.addParameter('client_id', clientID);
-			
-	var response = loginRequest.executeRequest();
-	if (response && response.getStatusCode() === globals.HTTPStatusCode.OK)
-	{
-		application.output(response.getResponseBody(), LOGGINGLEVEL.INFO);
-		return true;
-	}
-	else
-	if (response)
-		application.output(response.getStatusCode() + ': ' + response.getResponseBody(), LOGGINGLEVEL.FATAL);
-	
-	return false;
 }
 
 /**
@@ -1587,12 +1681,14 @@ function getCodiceDittaPrincipaleGruppoInstallazione(idGruppoInst)
  */
 function getLavoratoriGruppo(params,idditta,sortByNominativo)
 {
-	/** @type {{ returnValue: Boolean, ftrString: String }} */
 	var response = globals.getFiltroDipInEntrataGiornaliera(params);
-	if (response && response.returnValue === true)
+	if (response && response.StatusCode == HTTPStatusCode.OK)
 	{
 		/** @type {String} */
-		var ftrString = response.ftrString;
+		var ftrString = response.ReturnValue;
+		while(ftrString.indexOf('\"') != -1)
+			 ftrString = ftrString.replace('\"','\'');
+		
 		if (ftrString)
 		{
 			//il filtro da applicare tramite query è la stringa ritornata in precedenza
@@ -1605,7 +1701,7 @@ function getLavoratoriGruppo(params,idditta,sortByNominativo)
 			var idDipendenti = ftrDataset.getColumnAsArray(1);
 			
 			return idDipendenti;
-		}
+	    }
 		
 		return [];	
 	}
@@ -1669,7 +1765,9 @@ function getLavoratoriDittaDalAl(arrDitte,dal,al)
 		if(fs.search())
 	    {
 	    	fs.sort('nominativo asc');
-	    	return globals.foundsetToArray(fs,'idlavoratore');
+	    	/** @type {Array<Number>} */
+	    	var arrLavoratori = globals.foundsetToArray(fs,'idlavoratore')
+	    	return arrLavoratori;
 	    }
 	}
 	
@@ -1686,7 +1784,7 @@ function getLavoratoriDittaDalAl(arrDitte,dal,al)
  */
 function getFiltroDipInEntrataGiornaliera(params)
 {
-	var url = globals.WS_DOTNET_CASE == globals.WS_DOTNET.CORE ? globals.WS_URL + "/Giornaliera/FiltroEntrataInGiornaliera" : WS_URL + "/Trattamenti/FiltroEntrataInGiornaliera";
+	var url = globals.WS_CALENDAR + "/Calendar32/FiltroEntrataInGiornaliera";
 	return getWebServiceResponse(url,params);	
 }
 
@@ -1700,7 +1798,7 @@ function getFiltroDipInEntrataGiornaliera(params)
  */
 function getFiltroProgrammazioneTurni(params)
 {
-	var url = WS_URL + "/Trattamenti/FiltroEntrataProgrammazioneTurni";
+	var url = WS_CALENDAR + "/Calendar32/FiltroEntrataProgrammazioneTurni";
 	return getWebServiceResponse(url,params);	
 }
 
@@ -2100,7 +2198,7 @@ function ma_utl_userHasKey(userId, keyId, groupId, orgId)
 	var hasKey = false;
 	
 	if(userId instanceof String)
-	   userId = parseInt(userId,10)
+	   userId = parseInt(new String(userId),10)
 	
 	try
 	{
@@ -2152,7 +2250,7 @@ function ma_utl_userHasKey(userId, keyId, groupId, orgId)
 	    	
 	    	var dsOrgs = getUserOrganizations(userId);
 	    	if(dsOrgs.getMaxRowIndex())
-	    	   fsOrg.user_org_id = dsGroup.getColumnAsArray(1);
+	    	   fsOrg.user_org_id = dsOrgs.getColumnAsArray(1);
 	
 	    	if(orgId)
 	    		fsOrg.user_org_id = orgId; 
@@ -3183,15 +3281,45 @@ function getOrganizationId(user_org_id)
  * Restituisce il numero della settimana alla quale appartiene il giorno indicato
  * 
  * @param {Date} day
+ * 
+ * @return int 
+ * 
  *
- * @properties={typeid:24,uuid:"F9DB34CD-CACC-4671-A010-C94FFADC4BEE"}
+ * @properties={typeid:24,uuid:"A84D0472-D934-403E-BF0B-8E52D5993F8F"}
  */
-function getWeekNumber(day)
-{
+function getWeekNumberOld(day)
+{     
     var d = new Date(+day);
     d.setHours(0,0,0);
     d.setDate(d.getDate()+4-(d.getDay()||7));
     return Math.ceil((((d-new Date(d.getFullYear(),0,1))/8.64e7)+1)/7);
+}
+
+/**
+ * Restituisce il numero della settimana alla quale appartiene il giorno indicato
+ * 
+ * @param {Date} day
+ * 
+ * @return {{ Week : Number, Year : Number }}
+ *
+ * @properties={typeid:24,uuid:"6C8ED5FD-794D-489E-A7A3-BDCD42F6F75D"}
+ */
+function getWeekNumber(day)
+{
+	var tdt = new Date(day.valueOf());
+    var dayn = (day.getDay() + 6) % 7;
+    tdt.setDate(tdt.getDate() - dayn + 3);
+    var firstThursday = tdt.valueOf();
+    tdt.setMonth(0, 1);
+    if (tdt.getDay() !== 4) 
+        tdt.setMonth(0, 1 + ((4 - tdt.getDay()) + 7) % 7);
+      
+    var obj =  {
+    	Week : 1 + Math.ceil((firstThursday - tdt) / 604800000),
+        Year : tdt.getFullYear()
+		}
+    ;   
+    return obj;
 }
 
 /**
@@ -3596,7 +3724,9 @@ function getPrimaSettimanaPeriodo(_anno,_mese)
 {
 	// determina la prima settimana per il periodo scelto (serve per compilare la valuelist delle settimane selezionabili)
 	var primoGiornoPeriodo = new Date(_anno, _mese - 1,1);
-	var primaSettimana = globals.getWeekNumber(primoGiornoPeriodo);
+	/**Object { int week, int year }*/
+	var dayStruct = globals.getWeekNumber(primoGiornoPeriodo);
+	var primaSettimana = dayStruct['week'];
 	var primaSettimanaCalc = primaSettimana;
 	if(primaSettimana == 53 || primaSettimana == 52)
 		primaSettimanaCalc = 0;
@@ -4033,6 +4163,7 @@ function getGruppoInstallazioneDitta(idDitta)
 				var fsGrInst = getGruppiInstallazione();
 				if(fsGrInst && fsGrInst.getSize())
 				{
+					/** @type {JSRecord<db:/ma_presenze/e2sediinstallazione>}*/
 					var rec = fsGrInst.getRecord(1);
 					idGruppoInstallazione = rec.idgruppoinst;				
 				}
@@ -4596,7 +4727,7 @@ function isUtenteCessato(userid,ownerid)
 	if(idLav == null)
 		return false;
 	
-	var url = globals.WS_RFP_URL + '/Lavoratori/IsCessato';
+	var url = globals.WS_REGISTRY + '/Worker/IsCessato';
 	var params = {
 					idlavoratori : [idLav],
 					databasecliente : _to_sec_organization$lgn.sec_organization_to_sec_owner.database_name
@@ -4668,7 +4799,7 @@ function getDataCessazione(idLavoratore)
  */
 function getDataCessazioneWS(idLavoratore,dbCliente)
 {
-	var url = globals.WS_URL + '/Lavoratori/DataCessazione';
+	var url = globals.WS_REGISTRY + '/Worker/DataCessazione';
 	var params = {
 					idlavoratori : [idLavoratore],
 					databasecliente : dbCliente
@@ -4778,6 +4909,7 @@ function rendiTimbratureRiassegnabili(iddip,dal,al)
  * @param {Date} [al]
  *
  * @properties={typeid:24,uuid:"409D0699-82E4-4CCD-8197-9E7B60AB7635"}
+ * @AllowToRunInFind
  */
 function pulisciGiornaliera(iddip,dal,al)
 {
@@ -4786,46 +4918,48 @@ function pulisciGiornaliera(iddip,dal,al)
 	
 	dal = new Date(dal.getFullYear(),dal.getMonth(),dal.getDate() + 1);
 	
-	var recsGiorn = globals.getRecsGiornaliera(iddip,dal,al);
-	if(!recsGiorn)
-		return false;
-	
-	var arrIdGiornaliera = globals.foundsetToArray(recsGiorn,'idgiornaliera');
-	
-	var sqlPulisciGiorn = "DELETE FROM E2GiornalieraEventi WHERE idgiornaliera IN ("  +
-                          arrIdGiornaliera.map(function(id){return id}).join(',') + ")";
-
-    var success = plugins.rawSQL.executeSQL(globals.Server.MA_PRESENZE,
-                        globals.Table.GIORNALIERA_EVENTI,
-						sqlPulisciGiorn,
-						[]);
-
-	if(!success)
+	/** @type {JSFoundset <db:/ma_presenze/e2giornaliera>} */
+	var fsGiorn = databaseManager.getFoundSet(globals.Server.MA_PRESENZE,globals.Table.GIORNALIERA);
+	if(fsGiorn.find())
 	{
-		globals.ma_utl_showWarningDialog('Errore durante la cancellazione degli eventi nella tabella e2giornalieraeventi','Pulisci giornaliera eventi');
-		application.output(plugins.rawSQL.getException().getMessage(), LOGGINGLEVEL.ERROR);
-		return false;
-	}
+	   fsGiorn.iddip = iddip;
+	   fsGiorn.giorno = globals.dateFormat(dal,globals.ISO_DATEFORMAT) + '...' + globals.dateFormat(al,globals.ISO_DATEFORMAT) + '|yyyyMMdd';
+	   fsGiorn.search();
+	}	
 	
-	sqlPulisciGiorn = "DELETE FROM E2Giornaliera WHERE idgiornaliera IN ("  +
-					   arrIdGiornaliera.map(function(id){return id}).join(',') + ")"; 
-	
-    success = plugins.rawSQL.executeSQL(globals.Server.MA_PRESENZE,
-										globals.Table.GIORNALIERA,
-										sqlPulisciGiorn,
-										[]);
-	
-	if(!success)
+	if(fsGiorn.getSize())
 	{
-		globals.ma_utl_showWarningDialog('Errore durante la cancellazione degli eventi nella tabella e2giornaliera','Pulisci giornaliera eventi');
-		application.output(plugins.rawSQL.getException().getMessage(), LOGGINGLEVEL.ERROR);
-		return false;
+		var arrIdGiornaliera = globals.foundsetToArray(fsGiorn,'idgiornaliera');
+		
+		var sqlPulisciGiorn = "DELETE FROM E2GiornalieraEventi WHERE idgiornaliera IN ("  +
+	                          arrIdGiornaliera.map(function(id){return id}).join(',') + ")";
+	
+	    var success = plugins.rawSQL.executeSQL(globals.Server.MA_PRESENZE,
+	                        sqlPulisciGiorn,
+							[]);
+	
+		if(!success)
+		{
+			globals.ma_utl_showWarningDialog('Errore durante la cancellazione degli eventi nella tabella e2giornalieraeventi','Pulisci giornaliera eventi');
+			application.output(plugins.rawSQL.getException().getMessage(), LOGGINGLEVEL.ERROR);
+		}
+		
+		sqlPulisciGiorn = "DELETE FROM E2Giornaliera WHERE idgiornaliera IN ("  +
+						   arrIdGiornaliera.map(function(id){return id}).join(',') + ")"; 
+		
+	    success = plugins.rawSQL.executeSQL(globals.Server.MA_PRESENZE,
+											sqlPulisciGiorn,
+											[]);
+		
+		if(!success)
+		{
+			globals.ma_utl_showWarningDialog('Errore durante la cancellazione degli eventi nella tabella e2giornaliera','Pulisci giornaliera eventi');
+			application.output(plugins.rawSQL.getException().getMessage(), LOGGINGLEVEL.ERROR);
+		}
+		
+		plugins.rawSQL.flushAllClientsCache(globals.Server.MA_PRESENZE,
+		                    globals.Table.GIORNALIERA_PROGFASCE);
 	}
-	
-	plugins.rawSQL.flushAllClientsCache(globals.Server.MA_PRESENZE,
-	                    globals.Table.GIORNALIERA_PROGFASCE);
-	
-	return true;
 }
 
 /**

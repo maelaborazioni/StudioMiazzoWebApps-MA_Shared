@@ -28,7 +28,7 @@ function ToSede(ids)
  * Restituisce l'array di identificativi lavoratori ordinati secondo l'ordine alfabetico del rispettivo nominativo
  * 
  * @param {Array} arrIdLavoratori
- * @param {Number} tipologiaDitta
+ * @param {Number} [tipologiaDitta]
  * 
  * @return {Array}
  * 
@@ -44,12 +44,42 @@ function sortByNominativo(arrIdLavoratori,tipologiaDitta)
 		fsLav.idlavoratore = arrIdLavoratori;
 		if(fsLav.search())
 		{
-			if(tipologiaDitta == globals.Tipologia.ESTERNA)
-				fsLav.sort('lavoratori_to_lavoratori_personeesterne asc')
+			if(tipologiaDitta)
+			{
+				if(tipologiaDitta == globals.Tipologia.ESTERNA)
+					fsLav.sort('lavoratori_to_lavoratori_personeesterne asc')
+				else
+					fsLav.sort('lavoratori_to_persone.nominativo asc');
+			}
 			else
-				fsLav.sort('lavoratori_to_persone.nominativo asc');
+				fsLav.sort('lavoratori_to_persone.nominativo,lavoratori_to_lavoratori_personeesterne.nominativo');
+			
 			return globals.foundsetToArray(fsLav,'idlavoratore');
 		}
+	}
+	
+	return [];
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * TODO generated, please specify type and doc for the params
+ * @param arrIdLavoratori
+ *
+ * @properties={typeid:24,uuid:"D4AA7973-3A91-42AD-AD6B-0BCC330533F9"}
+ */
+function sortByRaggruppamentoDettaglio(arrIdLavoratori)
+{
+	/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
+	var fsLav = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
+	if(fsLav.find())
+	{
+		fsLav.idlavoratore = arrIdLavoratori;
+		if(fsLav.search())
+		   fsLav.sort('lavoratori_to_lavoratori_classificazioni.codclassificazione,lavoratori_to_persone.nominativo,lavoratori_to_lavoratori_personeesterne.nominativo');
+			
+		return globals.foundsetToArray(fsLav,'idlavoratore');
 	}
 	
 	return [];

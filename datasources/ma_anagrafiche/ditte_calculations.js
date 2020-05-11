@@ -35,7 +35,7 @@ function idditta_sede()
 }
 
 /**
- * @properties={typeid:36,uuid:"6E09E83A-FF27-4B49-91C6-7D3E55CA5E4E"}
+ * @properties={type:4,typeid:36,uuid:"6E09E83A-FF27-4B49-91C6-7D3E55CA5E4E"}
  */
 function idditta_cliente()
 {
