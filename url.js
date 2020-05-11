@@ -29,7 +29,7 @@ var FTP_STUDIOMIAZZO = 'ftp://ftp.studiomiazzo.it/';
  *
  * @properties={typeid:35,uuid:"1CBDF778-BF7F-4FD5-85F5-C39BB488E1FA"}
  */
-var PresenzaSempliceLite = application.getServerURL() + '/servoy-webclient/ss/s/PresenzaSempliceLite';
+var PresenzaSempliceLite = application.getServerURL() + '//loginpsl.html'//'/servoy-webclient/ss/s/PresenzaSempliceLite';
 
 /**
  * @properties={typeid:35,uuid:"47B9D17A-4F93-4AD6-AC96-83F6872FB2B4",variableType:-4}

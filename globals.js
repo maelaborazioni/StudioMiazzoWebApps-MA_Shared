@@ -1190,6 +1190,10 @@ function getWebServiceResponse(url, params)
 		request.addHeader('Content-type','text/json');
 		break;
 	}	
+	// TODO 
+	var bearerToken = '';
+	request.addHeader('WWW-Authenticate','Bearer');
+	request.addHeader('X-SourceFiles',bearerToken);
 	request.setBodyContent(jsonParams);
 	
 	var response = request.executeRequest();
@@ -1244,10 +1248,10 @@ function getWebServiceResponse(url, params)
 				msg = 'Il servizio richiesto non è disponibile, contattare l\'assistenza';
 				break;
 				
-//			case globals.HTTPStatusCode.UNAUTHORIZED:
-//				if(globals.loginToWebService(security.getUserName(), security.getClientID()))
-//					return getWebServiceResponse(url, params);
-//				break;
+			case globals.HTTPStatusCode.UNAUTHORIZED:
+				msg = 'L\'utente non dispone delle autorizzazioni necessarie';
+				break;
+				
 			case globals.HTTPStatusCode.FORBIDDEN:
 				msg = 'L\'utente non dispone delle autorizzazioni necessarie';
 				break;
@@ -1593,6 +1597,9 @@ function getLavoratoriGruppo(params,idditta,sortByNominativo)
 	{
 		/** @type {String} */
 		var ftrString = response.ftrString;
+		while(ftrString.indexOf('\"') != -1)
+			 ftrString = ftrString.replace('\"','\'');
+		
 		if (ftrString)
 		{
 			//il filtro da applicare tramite query è la stringa ritornata in precedenza
@@ -1605,7 +1612,7 @@ function getLavoratoriGruppo(params,idditta,sortByNominativo)
 			var idDipendenti = ftrDataset.getColumnAsArray(1);
 			
 			return idDipendenti;
-		}
+	    }
 		
 		return [];	
 	}
@@ -2152,7 +2159,7 @@ function ma_utl_userHasKey(userId, keyId, groupId, orgId)
 	    	
 	    	var dsOrgs = getUserOrganizations(userId);
 	    	if(dsOrgs.getMaxRowIndex())
-	    	   fsOrg.user_org_id = dsGroup.getColumnAsArray(1);
+	    	   fsOrg.user_org_id = dsOrgs.getColumnAsArray(1);
 	
 	    	if(orgId)
 	    		fsOrg.user_org_id = orgId; 
@@ -3183,15 +3190,47 @@ function getOrganizationId(user_org_id)
  * Restituisce il numero della settimana alla quale appartiene il giorno indicato
  * 
  * @param {Date} day
+ * 
+ * @return int 
+ * 
  *
- * @properties={typeid:24,uuid:"F9DB34CD-CACC-4671-A010-C94FFADC4BEE"}
+ * @properties={typeid:24,uuid:"A84D0472-D934-403E-BF0B-8E52D5993F8F"}
  */
-function getWeekNumber(day)
-{
+function getWeekNumberOld(day)
+{     
     var d = new Date(+day);
     d.setHours(0,0,0);
     d.setDate(d.getDate()+4-(d.getDay()||7));
     return Math.ceil((((d-new Date(d.getFullYear(),0,1))/8.64e7)+1)/7);
+}
+
+/**
+ * Restituisce il numero della settimana alla quale appartiene il giorno indicato
+ * 
+ * @param {Date} day
+ * 
+ * @return Object { int week, int year }
+ * 
+ *
+ * @properties={typeid:24,uuid:"6C8ED5FD-794D-489E-A7A3-BDCD42F6F75D"}
+ */
+function getWeekNumber(day)
+{
+	var tdt = new Date(day.valueOf());
+    var dayn = (day.getDay() + 6) % 7;
+    tdt.setDate(tdt.getDate() - dayn + 3);
+    var firstThursday = tdt.valueOf();
+    tdt.setMonth(0, 1);
+    if (tdt.getDay() !== 4) 
+        tdt.setMonth(0, 1 + ((4 - tdt.getDay()) + 7) % 7);
+      
+    var obj =  new Object({
+    	week : 1 + Math.ceil((firstThursday - tdt) / 604800000),
+        year : tdt.getFullYear()
+		}
+    );
+    
+    return obj;
 }
 
 /**
@@ -3596,7 +3635,9 @@ function getPrimaSettimanaPeriodo(_anno,_mese)
 {
 	// determina la prima settimana per il periodo scelto (serve per compilare la valuelist delle settimane selezionabili)
 	var primoGiornoPeriodo = new Date(_anno, _mese - 1,1);
-	var primaSettimana = globals.getWeekNumber(primoGiornoPeriodo);
+	/**Object { int week, int year }*/
+	var dayStruct = globals.getWeekNumber(primoGiornoPeriodo);
+	var primaSettimana = dayStruct['week'];
 	var primaSettimanaCalc = primaSettimana;
 	if(primaSettimana == 53 || primaSettimana == 52)
 		primaSettimanaCalc = 0;
