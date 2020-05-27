@@ -226,6 +226,7 @@ var Key =
 	PROG_TURNI               : 'Programmazione turni',
 	BLOCCA_INVIO_GIORNALIERA : 'Blocca invio giornaliera',
 	BLOCCA_IMPORTAZIONE_TIMBR: 'Blocca importazione timbrature',
+	EVENTI_DIPENDENTE        : 'Eventi dipendente',
 	// gestione chiavi RFP
 	RICHIESTA_PERMESSI       : 'RFP',
 	RICHIESTA_PERMESSI_CR    : 'RFP Capo Reparto',
@@ -553,7 +554,8 @@ var Table =
 	UTENTI_NEWS_READ                : 'utenti_newsread',
 	NOTIFICATION_REQUESTS           : 'notification_requests',
 	NOTIFICATION_SUBSCRIBERS        : 'notification_subscribers',
-	LOG_SCHEDULER                   : 'schedulerconfiguration'
+	LOG_SCHEDULER                   : 'schedulerconfiguration',
+	GRUPPI_CONTRATTO                : 'e2tabgruppicontrattuali'
 }
 
 /**
