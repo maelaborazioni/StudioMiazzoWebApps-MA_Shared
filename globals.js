@@ -226,6 +226,13 @@ var Key =
 	PROG_TURNI               : 'Programmazione turni',
 	BLOCCA_INVIO_GIORNALIERA : 'Blocca invio giornaliera',
 	BLOCCA_IMPORTAZIONE_TIMBR: 'Blocca importazione timbrature',
+	BLOCCA_COMPILA           : 'Blocca compila',
+	BLOCCA_CONTEGGIA         : 'Blocca conteggia',
+	BLOCCA_CONTROLLI_PRELIMINARI : 'Blocca controlli preliminari',
+	BLOCCA_VISUALIZZAZIONE_VISTA_MENSILE : 'Blocca visualizzazione vista mensile',
+	BLOCCA_VISUALIZZAZIONE_MOSTRA_TIMBR : 'Blocca visualizzazione mostra timbrature',
+	BLOCCA_OPERATIVITA_VISTA_MENSILE : 'Blocca operatività vista mensile',
+	BLOCCA_OPERATIVITA_MOSTRA_TIMBR : 'Blocca operatività mostra timbrature',
 	EVENTI_DIPENDENTE        : 'Eventi dipendente',
 	// gestione chiavi RFP
 	RICHIESTA_PERMESSI       : 'RFP',
@@ -877,8 +884,13 @@ var WS_REGISTRY = null;
  *
  * @properties={typeid:35,uuid:"8A7518D4-18E2-48D4-AD3B-4A75262B420A"}
  */
-var WS_JOB_SCHEDULER = null;
-
+var WS_JOB = null;
+/**
+ * @type {String}
+ * 
+ * @properties={typeid:35,uuid:"872A67E9-FBBC-4E8E-BFB6-3D76022186F3"}
+ */
+var WS_TASK = null;
 /**
  * @properties={typeid:24,uuid:"8626FE2F-44B0-4590-9C54-AC8201A9CBC3"}
  */
@@ -1786,7 +1798,7 @@ function getLavoratoriDittaDalAl(arrDitte,dal,al)
  */
 function getFiltroDipInEntrataGiornaliera(params)
 {
-	var url = globals.WS_CALENDAR + "/Calendar32/FiltroEntrataInGiornaliera";
+	var url = globals.WS_CALENDAR + "/Calendar32/CalendarEntranceFilter";
 	return getWebServiceResponse(url,params);	
 }
 
@@ -1800,7 +1812,7 @@ function getFiltroDipInEntrataGiornaliera(params)
  */
 function getFiltroProgrammazioneTurni(params)
 {
-	var url = WS_CALENDAR + "/Calendar32/FiltroEntrataProgrammazioneTurni";
+	var url = WS_CALENDAR + "/Calendar32/ShiftsEntranceFilter";
 	return getWebServiceResponse(url,params);	
 }
 
