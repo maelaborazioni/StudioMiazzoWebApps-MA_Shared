@@ -57,7 +57,7 @@ function GetPSToken(userId, organizationId) {
 	var url = "https://api.peoplegest.it/Authentication/token";
 	// predefined parameters as per 'superuser' able to access principal ws functionality
 	var params = {
-		userName : "servoy.ws",
+		userName : "support_it@studiomiazzo.it",
 		password : "82ma165sm",
 		GrantType : "password",
 		networkCode : "0000000000",
